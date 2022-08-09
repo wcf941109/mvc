@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Home2Module } from './apis/home2/home2.module';
 import { HomeModule } from './apis/home/home.module';
+import { ShootingModule } from './apis/shooting/shooting.module';
 
 @Module({
   imports: [
     HomeModule,
-    Home2Module,
+    ShootingModule,
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'localhost',
