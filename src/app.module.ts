@@ -1,10 +1,14 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { HomeModule } from './apis/home/home.module';
+import { IntroduceModule } from './apis/introduce/introduce.module';
+import { LoginModule } from './apis/login/login.module';
 import { ShootingModule } from './apis/shooting/shooting.module';
 
 @Module({
   imports: [
+    IntroduceModule,
+    LoginModule,
     HomeModule,
     ShootingModule,
     TypeOrmModule.forRoot({

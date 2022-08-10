@@ -1,17 +1,17 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Home } from '../home/entities/home.entity';
+import { Board } from './entities/board.entity';
 
 @Injectable()
-export class mainService {
+export class BoardService {
   constructor(
-    @InjectRepository(Home)
-    private readonly homeRepository: Repository<Home>,
+    @InjectRepository(Board)
+    private readonly boardRepository: Repository<Board>,
   ) {}
 
   async findOne(id) {
-    return await this.homeRepository.findOne({
+    return await this.boardRepository.findOne({
       where: {
         id,
       },

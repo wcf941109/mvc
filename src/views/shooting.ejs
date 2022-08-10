@@ -26,7 +26,7 @@
           <a href="/">Shooting_BasketBall</a>
         </div>
         <nav>
-          <li><a href="/about">소개</a></li>
+          <li><a href="http://localhost:3000/introduce">소개</a></li>
           <li><a href="/music/preview">자유게시판</a></li>
           <li><a href="http://localhost:3000/shooting">슈팅 관련</a></li>
           <li> <a class="loginText" href="/login">로그인</a></li>
@@ -39,37 +39,27 @@
     </div>
     <section class="section" id="section">
       <div class="title">
-          <a href="/recruit_art/all" class="art" id="art">슈팅 참고 영상</a>
-          <a href="/recruit_religion/all" class="religion" id="religion">슈팅폼 피드백</a>
+          <a href="/shooting_video" class="video" id="video">슈팅 참고 영상</a>
+          <a href="/shooting_feedback" class="feedback" id="feedback">슈팅폼 피드백</a>
       </div>
       <article class="article">
           <div class="top">
               <ul>
                   <li>
-                      <form action="/recruit_art/all">
+                      <form action="/shooting_video/all">
                           <button id="typeAll" class="type">전체</button>
                       </form>
                   </li>
                   <li>
-                      <form action="/recruit_art/orchestra">
-                          <button id="typeOrchestra" class="type">교향악단</button>
+                      <form action="/shooting_video/orchestra">
+                          <button id="typeSetshot" class="type">세트슛</button>
                       </form>
                   </li>
                   <li>
-                      <form action="/recruit_art/choir">
-                          <button id="typeChoir" class="type">합창</button>
-                      </form>
-                  </li>
-                  <li>
-                      <form action="/recruit_art/administration">
-                          <button id="typeAdministration" class="type">행정</button>
-                      </form>
-                  </li>
-                  <li>
-                      <form action="/recruit_art/etc">
-                          <button id="typeEtc" class="type">기타</button>
-                      </form>
-                  </li>
+                    <form action="/shooting_video/orchestra">
+                        <button id="typeJumpshot" class="type">점프슛</button>
+                    </form>
+                </li>
               </ul>
               <!-- <form action="/recruit_art/search" class="search" method="get">
                   <div class="bottom_line">
