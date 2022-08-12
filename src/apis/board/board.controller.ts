@@ -1,14 +1,23 @@
-import { Controller, Get, Param, Render } from '@nestjs/common';
+import { Body, Controller, Get, Post, Render } from '@nestjs/common';
 import { BoardService } from './board.service';
 
-@Controller('main')
+@Controller('board')
 export class BoardController {
   constructor(private readonly boardService: BoardService) {}
 
-  @Get('/:id')
-  @Render('main')
-  async main(@Param('id') id: string) {
-    const result = await this.boardService.findOne(id);
+  @Get('/')
+  @Render('board')
+  async board() {
+    const result = await this.boardService.find();
     return { data: result };
   }
+
+  @Post('/board')
+  async button(@Body() data) {
+    return await this.boardService.create(data);
+  }
+
+  @Get('/write')
+  @Render('write')
+  write() {}
 }

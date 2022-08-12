@@ -9,12 +9,4 @@ export class IntroduceService {
     @InjectRepository(Home)
     private readonly homeRepository: Repository<Home>,
   ) {}
-
-  async findOne(id) {
-    return await this.homeRepository.findOne({
-      where: {
-        id,
-      },
-    });
-  }
 }

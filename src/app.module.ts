@@ -1,12 +1,16 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { BoardModule } from './apis/\bboard/board.module';
 import { HomeModule } from './apis/home/home.module';
 import { IntroduceModule } from './apis/introduce/introduce.module';
 import { LoginModule } from './apis/login/login.module';
 import { ShootingModule } from './apis/shooting/shooting.module';
+import { WriteModule } from './apis/write/write.module';
 
 @Module({
   imports: [
+    WriteModule,
+    BoardModule,
     IntroduceModule,
     LoginModule,
     HomeModule,

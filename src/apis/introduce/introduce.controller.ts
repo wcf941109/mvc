@@ -7,8 +7,5 @@ export class MainController {
 
   @Get('/')
   @Render('introduce')
-  async main(@Param('id') id: string) {
-    const result = await this.introduceService.findOne(id);
-    return { data: result };
-  }
+  async introduce() {}
 }

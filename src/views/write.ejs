@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Enroll</title>
+
+    <!-- CSS 연결 -->
+    <link rel="stylesheet" href="/css/board.css" />
+    <link rel="stylesheet" href="/css/common.css" />
+
+    <!-- GOOGLE FONT -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Palette+Mosaic&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- axios 사용 -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div class="write_wrap">
+      <form action="" method="post">
+        <!-- <label for="">이름</label>
+        <input id="name" type="text" /> -->
+        <label for="">제목</label>
+        <input id="title" type="text" />
+        <label for="">내용</label>
+        <input id="content" type="text" />
+        <button id="button" type="button" onclick="enroll()">등록하기</button>
+      </form>
+    </div>
+    <!-- 자바 스크립트 연결 -->
+    <script type="text/javascript" src="/js/home.js"></script>
+  </body>
+</html>

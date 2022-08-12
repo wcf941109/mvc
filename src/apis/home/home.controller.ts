@@ -18,8 +18,4 @@ export class HomeController {
     console.log(data);
     return await this.homeService.create(data);
   }
-
-  @Get('/aaa')
-  @Render('aaa')
-  async aaa() {}
 }

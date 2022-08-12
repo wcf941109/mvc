@@ -1,12 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Board } from './entities/board.entity';
+import { Board } from '../\bboard/entities/board.entity';
+import { Write } from './entities/write.entity';
 
 @Injectable()
-export class BoardService {
+export class WriteService {
   constructor(
-    @InjectRepository(Board)
+    @InjectRepository(Write)
     private readonly boardRepository: Repository<Board>,
   ) {}
 
@@ -15,10 +16,9 @@ export class BoardService {
   }
 
   async create(data) {
-    const result = await this.boardRepository.save({
+    return await this.boardRepository.save({
       title: data.title,
       content: data.content,
     });
-    return result;
   }
 }
