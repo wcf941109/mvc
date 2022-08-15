@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Enroll</title>
+    <title>Write</title>
 
     <!-- CSS 연결 -->
     <link rel="stylesheet" href="/css/board.css" />
@@ -19,9 +19,24 @@
     />
 
     <!-- axios 사용 -->
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="/js/wirte.js"></script>
+    <title>Write</title>
   </head>
   <body>
+    <header id="header">
+      <div class="desktopHeader">
+        <div class="logo">
+          <a href="/">Shooting_BasketBall</a>
+        </div>
+        <nav>
+            <li><a href="/introduce">소개</a></li>
+            <li><a href="/board">자유게시판</a></li>
+          <li><a href="/shooting">슈팅 관련</a></li>
+          <li> <a class="loginText" href="/login">로그인</a></li>
+        </nav>
+      </div>
+      </div>
+    </header>
     <div class="write_wrap">
       <form action="" method="post">
         <!-- <label for="">이름</label>
@@ -30,10 +45,10 @@
         <input id="title" type="text" />
         <label for="">내용</label>
         <input id="content" type="text" />
-        <button id="button" type="button" onclick="enroll()">등록하기</button>
+        <button id="enroll" type="button" onclick="add()">등록하기</button> 
       </form>
     </div>
     <!-- 자바 스크립트 연결 -->
-    <script type="text/javascript" src="/js/home.js"></script>
+    <script type="text/javascript" src="/js/board.js"></script>
   </body>
 </html>

@@ -1,19 +1,21 @@
 import {
   Column,
   CreateDateColumn,
-  DeleteDateColumn,
   Entity,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
 @Entity()
-export class Write {
-  @PrimaryGeneratedColumn('uuid')
+export class Health {
+  @PrimaryGeneratedColumn('increment')
   id: string;
 
   @Column()
   title: string;
+
+  @Column()
+  name: string;
 
   @Column()
   content: string;
@@ -23,7 +25,4 @@ export class Write {
 
   @UpdateDateColumn()
   updatedAt: Date;
-
-  @DeleteDateColumn()
-  deletedAt: Date;
 }
