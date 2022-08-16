@@ -14,8 +14,7 @@ export class BoardController {
     return { data: result };
   }
 
-  @Post('/write')
-  @Render('write')
+  @Post('/board')
   async button(@Body() data) {
     return await this.boardService.create(data);
   }
@@ -24,7 +23,7 @@ export class BoardController {
   @Render('write')
   write() {}
 
-  @Get('/login')
-  @Render('login')
-  login() {}
+  @Get('/board_detail')
+  @Render('board_detail')
+  board_detail() {}
 }

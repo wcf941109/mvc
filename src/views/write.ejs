@@ -17,12 +17,14 @@
       href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Palette+Mosaic&display=swap"
       rel="stylesheet"
     />
-
     <!-- axios 사용 -->
-    <script src="/js/wirte.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    
+    
     <title>Write</title>
   </head>
   <body>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>    
     <header id="header">
       <div class="desktopHeader">
         <div class="logo">
@@ -37,16 +39,13 @@
       </div>
       </div>
     </header>
+
     <div class="write_wrap">
-      <form action="" method="post">
-        <!-- <label for="">이름</label>
-        <input id="name" type="text" /> -->
         <label for="">제목</label>
         <input id="title" type="text" />
         <label for="">내용</label>
         <input id="content" type="text" />
-        <button id="enroll" type="button" onclick="add()">등록하기</button> 
-      </form>
+        <button id="" type="button" onclick="add()">등록하기</button> 
     </div>
     <!-- 자바 스크립트 연결 -->
     <script type="text/javascript" src="/js/board.js"></script>

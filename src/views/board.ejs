@@ -52,35 +52,29 @@
                       <li>
                   </li>
               </ul>
-
-              <!-- <form action="/recruit_art/search" class="search" method="get">
-                  <div class="bottom_line">
-                      <input type="text" name="name" placeholder="검색어를 입력해주세요."/>
-                      <button class="fa-solid fa-magnifying-glass"></button>
-                  </div>
-              </form> -->
           </div>
           <a href="/write">게시물작성</a></li>
 
           <div class="board" id="board">
               <table> 
                   <thead>
-                    <% data.forEach(el => { %>
-
-                      <tr>
-                          <!-- <td>번호</td>
-                          <td>제목</td>                            
-                          <td>작성자</td>
-                          <td>게시일</td> -->
-                          <td><%=el.title%></td>
-                          <td><%=el.content%></td>
-                          <td><%=el.date%></td>
-                      </tr>
-                      <% }) %>
+                    <tr>
+                        <th>번호</th>
+                        <th>제목</th>
+                        <th>작성자</th>
+                        <th>게시일</th>
+                    </tr>
                   </thead> 
                   <tbody>
+                    <% data.forEach(el => { %>
+                        <tr>
+                            <td><%=el.id%></td>
+                            <td><a href="board_detail/1"><%=el.title%></a></td>
+                            <td><%=el.content%></td>
+                            <td><%=el.createdAt.getFullYear()%>-<%=el.createdAt.getMonth()+1%>-<%=el.createdAt.getDate()%></td>
 
-                      
+                        </tr>
+                        <% }) %>
                 </tbody>
               </table>    
           </div>
@@ -123,6 +117,8 @@
                       
                   </div>
 
+                  
+
                   <a href="" id="right" class="right">
                       <i class="arrow fa-solid fa-angle-right"></i>
                   </a>
@@ -141,10 +137,8 @@
   </footer>
    <!-- 자바 스크립트 연결 -->
    <script type="text/javascript" src="/js/board.js"></script>
-
+   <script type="text/javascript" src="/js/date.js"></script>
 </body>
 </html>
-
-
 
 
