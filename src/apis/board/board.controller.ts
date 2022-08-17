@@ -19,11 +19,12 @@ export class BoardController {
     return await this.boardService.create(data);
   }
 
+  @Post('/board')
+  async delete(@Body() data) {
+    return await this.boardService.delete(data);
+  }
+
   @Get('/write')
   @Render('write')
   write() {}
-
-  @Get('/board_detail')
-  @Render('board_detail')
-  board_detail() {}
 }

@@ -73,12 +73,12 @@ header .desktopHeader .login a {
   cursor: pointer;
 }
 
-/**  line_wrap  **/
-.line_wrap {
+/**  title  **/
+.title {
   border-top: 2px solid #000;
   border-bottom: 2px solid #000;
   text-align: center;
-  padding: 20px 0;
+  padding: 0px 0;
   font-weight: bold;
   font-size: 25px;
 }
@@ -464,4 +464,43 @@ footer .footerText {
   font-size: 20px;
   font-family: sans-serif;
   font-weight: 700;
+}
+
+.title {
+  height: 8vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 25px;
+  border-top: 3px solid black;
+  border-bottom: 3px solid black;
+  animation: title 2s 1 forwards;
+}
+
+@keyframes title {
+  from {
+    margin-left: -100px;
+    opacity: 0;
+  }
+  to {
+    margin-left: 0;
+    opacity: 1;
+  }
+}
+
+.title .art {
+  font-weight: bold;
+}
+
+.title a {
+  margin: 0 30px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
+    'Lucida Sans', Arial, sans-serif;
+  color: black;
+  cursor: pointer;
+}
+
+.title a:hover {
+  border-bottom: 3px solid black;
+  font-weight: bold;
 }

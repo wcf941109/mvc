@@ -34,26 +34,14 @@
       </div>
       </div>
     </header>
-
-
-    </div>
-
     <section class="section" id="section">
       <div class="title">
-          <a href="/shooting_video" class="video" id="video">자유게시판</a>
+          <a href="/board" class="board" id="board">자유게시판</a>
       </div>
       <article class="article">
-          <div class="top">
-              <ul>
-                  <li>
-                      <form action="/shooting_video/all">
-                          <button id="typeAll" class="type">전체</button>
-                      </form>
-                      <li>
-                  </li>
-              </ul>
+          <div class="write_wrap">
+            <button type="button"><a href="/write">게시물작성</a></button></li>
           </div>
-          <a href="/write">게시물작성</a></li>
 
           <div class="board" id="board">
               <table> 
@@ -69,9 +57,9 @@
                     <% data.forEach(el => { %>
                         <tr>
                             <td><%=el.id%></td>
-                            <td><a href="board_detail/1"><%=el.title%></a></td>
-                            <td><%=el.content%></td>
-                            <td><%=el.createdAt.getFullYear()%>-<%=el.createdAt.getMonth()+1%>-<%=el.createdAt.getDate()%></td>
+                            <td><a href="board_detail/<%=el.id%>"><%=el.title%></a></td>
+                            <td><%=el.id%></td>
+                            <td><%=el.createdAt%></td>
 
                         </tr>
                         <% }) %>

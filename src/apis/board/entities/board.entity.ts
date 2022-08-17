@@ -18,8 +18,9 @@ export class Board {
   @Column()
   content: string;
 
-  @CreateDateColumn()
-  createdAt: Date;
+  // @Transform((createdAt) => moment(createdAt).format('YYYY/MM/DD'))
+  @Column()
+  createdAt: string;
 
   @UpdateDateColumn()
   updatedAt: Date;

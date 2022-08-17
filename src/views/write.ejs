@@ -7,7 +7,7 @@
     <title>Write</title>
 
     <!-- CSS 연결 -->
-    <link rel="stylesheet" href="/css/board.css" />
+    <link rel="stylesheet" href="/css/write.css" />
     <link rel="stylesheet" href="/css/common.css" />
 
     <!-- GOOGLE FONT -->
@@ -40,13 +40,28 @@
       </div>
     </header>
 
+    <div class="title">
+      <a href="/shooting_video" class="video" id="video">게시글 작성</a>
+  </div>
+
     <div class="write_wrap">
-        <label for="">제목</label>
-        <input id="title" type="text" />
-        <label for="">내용</label>
-        <input id="content" type="text" />
-        <button id="" type="button" onclick="add()">등록하기</button> 
+      <form action="" method="post">
+        <div class="write">
+          <label for="title">제목</label>
+          <input id="title" type="text" />
+        </div>
+
+        <div class="write">
+          <label for="content">내용</label>
+          <textarea name="" id="content" cols="30" rows="10" ></textarea>
+        </div>
+        <div class="button_wrap">
+          <button id="enroll" type="button" onclick="add()">등록하기</button>
+          <button id="getList" type="button">취소하기</button>
+        </div>
+      </form>
     </div>
+    <!-- write_wrap -->
     <!-- 자바 스크립트 연결 -->
     <script type="text/javascript" src="/js/board.js"></script>
   </body>

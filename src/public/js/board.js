@@ -13,3 +13,9 @@ function add() {
       div.innerText = res.data.content;
     });
 }
+
+document.getElementById('getList').addEventListener('click', () => {
+  fetch('/board').then(function () {
+    window.location = '/board';
+  });
+});

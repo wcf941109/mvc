@@ -7,9 +7,13 @@ export class BoardDetailController {
     private readonly boarddetailService: BoardDetailService, //
   ) {}
 
-  //   @Get('/board_detail')
-  //   @Render('board_detail')
-  //   board_detail() {}
+  @Get('/board_detail')
+  @Render('board_detail')
+  board_detail() {}
+
+  @Get('/update')
+  @Render('update')
+  update() {}
 
   @Get('/:id')
   @Render('board_detail')

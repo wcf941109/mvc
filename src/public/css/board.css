@@ -296,3 +296,55 @@ footer .footerText {
   font-family: sans-serif;
   font-weight: 700;
 }
+
+.button_wrap {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.button_wrap button {
+  padding: 12px;
+  cursor: pointer;
+  width: 80%;
+  margin-left: 111px;
+  margin-top: 13px;
+  border-radius: 10px;
+  border: none;
+}
+
+.button_wrap button:hover {
+  background-color: #fff;
+  border: 1px solid #000;
+}
+
+/**  write_wrap  **/
+.write_wrap {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  padding: 20px 0;
+}
+
+.write_wrap button {
+  border: none;
+  background-color: none !important;
+  border-radius: 8px;
+}
+
+.write_wrap a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #000;
+  height: 40px;
+  width: 200px;
+  font-size: 16px;
+  font-weight: bold;
+  transition: transform 250ms;
+}
+
+.write_wrap button:hover {
+  background-color: #fff;
+  border: 1px solid #000;
+}

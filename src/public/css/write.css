@@ -1,0 +1,179 @@
+/******  header  *******/
+header .desktopHeader {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  justify-content: space-between;
+  margin: 10px 0;
+  padding: 0 15px;
+}
+
+header .desktopHeader .logo {
+  height: 100%;
+  width: 30vw;
+}
+
+header .desktopHeader .logo a {
+  font-family: 'Fredoka One', cursive;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  font-size: 40px;
+  height: 100%;
+  width: 100%;
+}
+
+header .desktopHeader nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  /* width: 68vw; */
+}
+header .desktopHeader nav li {
+  /* padding: 0 0.5rem; */
+  /* margin: 0 5rem; */
+  margin: 0 15px;
+}
+
+header .desktopHeader nav li:hover {
+  border-bottom: 3px solid black;
+  transition: 0.1s linear;
+}
+
+header .desktopHeader nav li a {
+  font-size: 1.3rem;
+  color: black;
+}
+
+header .desktopHeader .login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 16vw;
+}
+
+header .desktopHeader .login .name {
+  color: rgb(170, 169, 169);
+  font-size: 1rem;
+}
+
+header .desktopHeader .login .fa-solid {
+  color: black;
+  margin-left: 10px;
+  font-size: 1.5rem;
+}
+
+header .desktopHeader .login a {
+  font-size: 1.5rem;
+  padding: 0 0.5rem;
+  color: black;
+  cursor: pointer;
+}
+
+header .desktopHeader .login .loginText:hover {
+  border-bottom: 3px solid black;
+  transition: 0.1s linear;
+}
+
+header .desktopHeader .login .logout:hover {
+  border-bottom: 3px solid black;
+  transition: 0.1s linear;
+}
+
+.title {
+  height: 8vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 25px;
+  border-top: 3px solid black;
+  border-bottom: 3px solid black;
+  animation: title 2s 1 forwards;
+}
+
+@keyframes title {
+  from {
+    margin-left: -100px;
+    opacity: 0;
+  }
+  to {
+    margin-left: 0;
+    opacity: 1;
+  }
+}
+
+.title a {
+  margin: 0 30px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
+    'Lucida Sans', Arial, sans-serif;
+  color: black;
+  cursor: pointer;
+}
+.title a:hover {
+  border-bottom: 3px solid black;
+  font-weight: bold;
+}
+
+/*********  write_wrap  *********/
+.write_wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.write_wrap form {
+  width: 550px;
+}
+
+.write_wrap .write {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.write input {
+  height: 40px;
+  width: 80%;
+  text-indent: 10px;
+}
+
+.write label {
+  width: 20%;
+  text-align: center;
+}
+
+.write select {
+  width: 80%;
+  height: 40px;
+  text-indent: 10px;
+}
+
+.write textarea {
+  width: 80%;
+  resize: none;
+}
+
+.button_wrap {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.button_wrap button {
+  padding: 12px;
+  cursor: pointer;
+  width: 80%;
+  margin-left: 111px;
+  margin-top: 13px;
+  border-radius: 10px;
+  border: none;
+}
+
+.button_wrap button:hover {
+  background-color: #fff;
+  border: 1px solid #000;
+}
