@@ -27,10 +27,10 @@ export class BoardController {
     return await this.boardService.create(data);
   }
 
-  @Put('update')
-  async update(@Body() data) {
-    return await this.boardService.update(data);
-  }
+  // @Put('update')
+  // async update(@Body() data) {
+  //   return await this.boardService.update(data);
+  // }
 
   @Post('/board')
   async delete(@Body() data) {
@@ -41,9 +41,20 @@ export class BoardController {
   @Render('write')
   write() {}
 
-  @Get('/update')
+  // @Get('/update')
+  // @Render('update')
+  // updat1() {}
+
+  // @Get('/update')
+  // @Render('update')
+  // async updatepage(@Param('id') id: string) {
+  //   const result = await this.boardService.findOne(id);
+  //   return { data: result };
+  // }
+
+  @Get('/board_detail/update/:id')
   @Render('update')
-  async updatepage(@Param('id') id: string) {
+  async detail(@Param('id') id: string) {
     const result = await this.boardService.findOne(id);
     return { data: result };
   }

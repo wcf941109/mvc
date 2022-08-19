@@ -6,9 +6,11 @@ import { HomeModule } from './apis/home/home.module';
 import { IntroduceModule } from './apis/introduce/introduce.module';
 import { LoginModule } from './apis/login/login.module';
 import { ShootingModule } from './apis/shooting/shooting.module';
+import { UpdateModule } from './apis/update/update.module';
 
 @Module({
   imports: [
+    UpdateModule,
     BoardDetailModule,
     BoardModule,
     IntroduceModule,

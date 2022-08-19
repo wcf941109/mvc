@@ -11,7 +11,9 @@ export class BoardService {
   ) {}
 
   async find() {
-    return await this.boardRepository.find();
+    return await this.boardRepository.find({
+      order: { id: 'desc' },
+    });
   }
 
   async findOne(id) {
@@ -29,24 +31,26 @@ export class BoardService {
     const dd = String(date.getDate()).padStart(2, '0');
     const currentDate = `${yyyy}-${mm}-${dd}`;
     return await this.boardRepository.save({
+      name: data.name,
       title: data.title,
       content: data.content,
       createdAt: currentDate,
     });
   }
 
-  async update(data) {
-    const result = await this.boardRepository.update(
-      { title: data.title },
-      { content: data.content },
-    );
-    return result;
-    // if (result.affected) {
-    //   return await this.boardRepository.findOne(data.id);
-    // } else {
-    //   throw new ConflictException('업데이트 실패했습니다.');
-    // }
-  }
+  // async update(data) {
+  //   const result = await this.boardRepository.update(
+  //     { title: data.title },
+  //     { content: data.content },
+  //   );
+  //   console.log(result);
+  //   return result;
+  //   // if (result.affected) {
+  //   //   return await this.boardRepository.findOne(data.id);
+  //   // } else {
+  //   //   throw new ConflictException('업데이트 실패했습니다.');
+  //   // }
+  // }
 
   async delete(data) {
     const result = await this.boardRepository.softDelete(data);

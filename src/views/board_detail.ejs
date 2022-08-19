@@ -51,7 +51,6 @@
     <div class="title">
       <h2>
         <td><%=data.title%></td>
-
       </h2>
     </div>
     <div class="type">
@@ -61,9 +60,10 @@
             <td>번호</td>
             <td><%=data.id%></td>
             <td>작성자</td>
-            <td>수정예정</td>
+            <td><%=data.name%></td>
             <td>작성일자</td>
             <td><%=data.createdAt%></td>
+
           </tr>
         </tbody>
       </table>
@@ -73,9 +73,11 @@
     </div>
     <div class="listBtn">
       <button type="button"id="getList">목록</button>
-      <button type="button"id="getUpdate">수정</button>
-      <button type="button"id="getUpdate">삭제</button>
+      <tr>
+        <button type="button"><a href="update/<%=data.id%>">수정</a></button>
+      </tr>
 
+      <button type="button"id="getDelete">삭제</button>
     </div>
   </section>
   <!--  section  -->

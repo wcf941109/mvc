@@ -13,6 +13,9 @@ export class Board {
   id: string;
 
   @Column()
+  name: string;
+
+  @Column()
   title: string;
 
   @Column()
