@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Post, Render } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Put,
+  Render,
+} from '@nestjs/common';
 import { BoardService } from './board.service';
 
 @Controller()
@@ -19,6 +27,11 @@ export class BoardController {
     return await this.boardService.create(data);
   }
 
+  @Put('update')
+  async update(@Body() data) {
+    return await this.boardService.update(data);
+  }
+
   @Post('/board')
   async delete(@Body() data) {
     return await this.boardService.delete(data);
@@ -27,4 +40,11 @@ export class BoardController {
   @Get('/write')
   @Render('write')
   write() {}
+
+  @Get('/update')
+  @Render('update')
+  async updatepage(@Param('id') id: string) {
+    const result = await this.boardService.findOne(id);
+    return { data: result };
+  }
 }

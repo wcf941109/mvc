@@ -4,23 +4,27 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <!-- CSS 연결 -->
-        <link rel="stylesheet" href="/css/board.css" />
-        <link rel="stylesheet" href="/css/board_detail.css" />
-        <link rel="stylesheet" href="/css/common.css" />
+    <title>Write</title>
+
+    <!-- CSS 연결 -->
+    <link rel="stylesheet" href="/css/write.css" />
+    <link rel="stylesheet" href="/css/common.css" />
+
+    <!-- GOOGLE FONT -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Palette+Mosaic&display=swap"
+      rel="stylesheet"
+    />
+    <!-- axios 사용 -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     
     
-        <!-- GOOGLE FONT -->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Palette+Mosaic&display=swap" rel="stylesheet">
-    
-        <!-- axios 사용 -->
-        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    
-    <title>update</title>
+    <title>Update</title>
   </head>
   <body>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>    
     <header id="header">
       <div class="desktopHeader">
         <div class="logo">
@@ -36,56 +40,29 @@
       </div>
     </header>
 
-
-    </div>
-
-    <section class="section" id="section">
-      <div class="title">
-          <class="board_detail" id="board_detail">게시글 수정</class>
-      </div>
-      <article class="article">
-
-      </article>
-  </section>
-  <section class="section01">
     <div class="title">
-      <h2>
-        <td>1111</td>
+      <a href="/shooting_video" class="video" id="video">게시글 수정</a>
+  </div>
 
-      </h2>
-    </div>
-    <div class="type">
-      <table class="table">
-        <tbody>
-          <tr>
-            <td>번호</td>
-            <td>1111</td>
-            <td>작성자</td>
-            <td>수정예정</td>
-            <td>작성일자</td>
-            <td>11111</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="content">
-      <textarea name="" id="" style="height:625px" readonly>111111</textarea>
-    </div>
-    <div class="listBtn">
-      <button type="button"id="getList">목록</button>
-      <button type="button"id="getUpdate">수정하기</button>
+    <div class="write_wrap">
+      <form action="" method="post">
+        <div class="write">
+          <label for="title">제목</label>
+          <input id="title" value="<%=data.title%>" type="text" />
+        </div>
 
+        <div class="write">
+          <label for="content">내용</label>
+          <textarea name="" id="content" value="<%=data.content%>" cols="30" rows="10"  ><%=data.content%></textarea>
+        </div>
+        <div class="button_wrap">
+          <button id="" type="button" onclick="update()">수정하기</button>
+          <button id="getList" type="button">취소하기</button>
+        </div>
+      </form>
     </div>
-  </section>
-  <!--  section  -->
-  <footer id="footer">    
-      <div class="footerText">문의 : wcf941109@gmail.com</div>       
-  </footer>
-   <!-- 자바 스크립트 연결 -->
-   <script type="text/javascript" src="/js/board.js"></script>
-   <script type="text/javascript" src="/js/board_detail.js"></script>
-
-</body>
+    <!-- write_wrap -->
+    <!-- 자바 스크립트 연결 -->
+    <script type="text/javascript" src="/js/board.js"></script>
+  </body>
 </html>
-
-

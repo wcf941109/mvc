@@ -19,3 +19,23 @@ document.getElementById('getList').addEventListener('click', () => {
     window.location = '/board';
   });
 });
+
+function update() {
+  const title = document.getElementById('title').value;
+  const content = document.getElementById('content').value;
+
+  axios
+    .put('/update', {
+      title,
+      content,
+    })
+
+    .then((res) => {
+      div.innerText = res.data.title;
+      div.innerText = res.data.content;
+    });
+
+  fetch('/board').then(function () {
+    window.location = '/board';
+  });
+}

@@ -11,10 +11,6 @@ export class BoardDetailController {
   @Render('board_detail')
   board_detail() {}
 
-  @Get('/update')
-  @Render('update')
-  update() {}
-
   @Get('/:id')
   @Render('board_detail')
   async detail(@Param('id') id: string) {
