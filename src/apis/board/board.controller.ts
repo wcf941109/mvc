@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Post,
@@ -32,7 +33,7 @@ export class BoardController {
   //   return await this.boardService.update(data);
   // }
 
-  @Post('/board')
+  @Delete('/board')
   async delete(@Body() data) {
     return await this.boardService.delete(data);
   }
