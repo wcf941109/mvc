@@ -24,7 +24,6 @@
     <title>Update</title>
   </head>
   <body>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>    
     <header id="header">
       <div class="desktopHeader">
         <div class="logo">
@@ -50,21 +49,24 @@
           <label for="title">제목</label>
           <input id="title" value="<%=data.title%>" type="text" />
         </div>
+        <div class="name">
+          <label for="name">작성자</label>
+          <input id="name" value="<%=data.name%>" type="text" />
+        </div>
 
         <div class="write">
           <label for="content">내용</label>
           <textarea name="" id="content" value="<%=data.content%>" cols="30" rows="10"  ><%=data.content%></textarea>
         </div>
         <div class="button_wrap">
-          <button id="" type="button" onclick="update()">수정하기</button>
+          <button id="aaa" type="button" onclick="update()">수정하기</button>
           <button id="getList" type="button">취소하기</button>
         </div>
       </form>
     </div>
     <!-- write_wrap -->
     <!-- 자바 스크립트 연결 -->
-    <script type="text/javascript" src="/js/board.js"></script>
-    <script type="text/javascript" src="/js/board_detail.js"></script>
+    <script type="text/javascript" src="/js/update.js"></script>
 
   </body>
 </html>

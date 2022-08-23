@@ -1,7 +1,17 @@
-import { Controller, Get, Param, Post, Render } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Put,
+  Render,
+} from '@nestjs/common';
+import { CreateBoardInput } from '../\bboard/dto/createBoard.input';
+import { UpdateBoardInput } from '../\bboard/dto/updateBoard.input';
 import { UpdateService } from './update.service';
 
-@Controller('update')
+@Controller('/board_detail/update')
 export class UpdateController {
   constructor(
     private readonly updateService: UpdateService, //
@@ -13,13 +23,18 @@ export class UpdateController {
 
   @Get('/:id')
   @Render('update')
-  async updatePageOpen(@Param('id') id: string) {
+  async updatePageOpen(
+    @Param('id') id: string, //
+  ) {
     const result = await this.updateService.findOne(id);
     return { data: result };
   }
 
-  // @Put('update')
-  // async update(@Body() data) {
-  //   return await this.updateService.update(data);
-  // }
+  @Put('/:id')
+  async update(
+    @Param('id') id: string, //
+    @Body() UpdateBoardInput,
+  ) {
+    return await this.updateService.update({ id, UpdateBoardInput });
+  }
 }

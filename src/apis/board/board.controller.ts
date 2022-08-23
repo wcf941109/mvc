@@ -33,7 +33,7 @@ export class BoardController {
   //   return await this.boardService.update(data);
   // }
 
-  @Delete('/board')
+  @Post('/board')
   async delete(@Body() data) {
     return await this.boardService.delete(data);
   }
@@ -42,21 +42,15 @@ export class BoardController {
   @Render('write')
   write() {}
 
-  // @Get('/update')
-  // @Render('update')
-  // updat1() {}
-
-  // @Get('/update')
-  // @Render('update')
-  // async updatepage(@Param('id') id: string) {
-  //   const result = await this.boardService.findOne(id);
-  //   return { data: result };
-  // }
-
   @Get('/board_detail/update/:id')
   @Render('update')
   async detail(@Param('id') id: string) {
     const result = await this.boardService.findOne(id);
     return { data: result };
   }
+
+  // @Post('/board_detail/update/:id')
+  // async updateData(@Body() data) {
+  //   return await this.boardService.update(data);
+  // }
 }

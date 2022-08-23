@@ -38,22 +38,26 @@ export class BoardService {
     });
   }
 
-  // async update(data) {
-  //   const result = await this.boardRepository.update(
-  //     { title: data.title },
-  //     { content: data.content },
-  //   );
-  //   console.log(result);
-  //   return result;
-  //   // if (result.affected) {
-  //   //   return await this.boardRepository.findOne(data.id);
-  //   // } else {
-  //   //   throw new ConflictException('업데이트 실패했습니다.');
-  //   // }
-  // }
+  async update(data) {
+    const result = await this.boardRepository.update(
+      { title: data.title },
+      { content: data.content },
+    );
+    console.log(result);
+    return result;
+    // if (result.affected) {
+    //   return await this.boardRepository.findOne(data.id);
+    // } else {
+    //   throw new ConflictException('업데이트 실패했습니다.');
+    // }
+  }
 
   async delete(data) {
-    const result = await this.boardRepository.softDelete(data);
+    const result = await this.boardRepository.softDelete({
+      name: data.name,
+      title: data.title,
+      content: data.content,
+    });
     return result.affected ? true : false;
   }
 }

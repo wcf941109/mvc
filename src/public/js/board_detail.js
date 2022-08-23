@@ -4,8 +4,8 @@ document.getElementById('getList').addEventListener('click', () => {
   });
 });
 
-document.getElementById('getUpdate').addEventListener('click', () => {
-  fetch('/update').then(function () {
-    window.location = '/update';
-  });
-});
+// document.getElementById('getUpdate').addEventListener('click', () => {
+//   fetch('/update').then(function () {
+//     window.location = '/update';
+//   });
+// });
