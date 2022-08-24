@@ -177,3 +177,8 @@ header .desktopHeader .login .logout:hover {
   background-color: #fff;
   border: 1px solid #000;
 }
+
+.write .title2 {
+  background-color: #efefef;
+  border: none;
+}

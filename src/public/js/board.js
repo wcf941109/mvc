@@ -14,6 +14,7 @@ function add() {
       div.innerText = res.data.name;
       div.innerText = res.data.title;
       div.innerText = res.data.content;
+      document.getElementById('data').appendChild(div);
     });
 
   fetch('/board').then(function () {
@@ -32,7 +33,7 @@ document.getElementById('deleteBoard').addEventListener('click', () => {
   const id = [URLSearch.get('id')];
   const saveConfirm = confirm('게시글을 삭제하시겠습니까?');
   if (saveConfirm) {
-    fetch('/board_detail/:id', {
+    fetch('/board_detail/:id/delete', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -11,16 +11,25 @@ function update() {
     })
 
     .then((res) => {
-      const div = document.createElement('div');
+      // const div = document.createElement('div');
 
-      div.innerText = res.data.name;
-      div.innerText = res.data.title;
-      div.innerText = res.data.content;
+      const updatename = res.data.name;
+      const updatetitle = res.data.title;
+      const updatecontent = res.data.content;
+
+      div.textContent = updatename;
+      div.textContent = updatetitle;
+      div.textContent = updatecontent;
+
+      // div.innerText = res.data.name;
+      // div.innerText = res.data.title;
+      // div.innerText = res.data.content;
+      console.log(n);
     });
 
-  // fetch('/board').then(function () {
-  //   window.location = '/board';
-  // });
+  fetch('/board').then(function () {
+    window.location = '/board';
+  });
 }
 
 document.getElementById('getList').addEventListener('click', () => {

@@ -6,9 +6,8 @@ import {
   Post,
   Put,
   Render,
+  Req,
 } from '@nestjs/common';
-import { CreateBoardInput } from '../\bboard/dto/createBoard.input';
-import { UpdateBoardInput } from '../\bboard/dto/updateBoard.input';
 import { UpdateService } from './update.service';
 
 @Controller('/board_detail/update')
@@ -31,10 +30,7 @@ export class UpdateController {
   }
 
   @Put('/:id')
-  async update(
-    @Param('id') id: string, //
-    @Body() UpdateBoardInput,
-  ) {
-    return await this.updateService.update({ id, UpdateBoardInput });
+  async update(@Body() UpdateBoardInput, @Req() req) {
+    return await this.updateService.update({ req, UpdateBoardInput });
   }
 }

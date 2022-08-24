@@ -19,29 +19,36 @@ export class UpdateService {
     });
   }
 
-  async update({ id, UpdateBoardInput }) {
-    // const { title, ...items } = UpdateBoardInput;
-    // return await this.updateRepository.update(
-    //   { title: data.title },
-    //   { content: data.content },
-    // );
+  async update({ req, UpdateBoardInput }) {
     const findUpdate = await this.updateRepository.findOne({
-      where: { id },
+      where: { title: req.body.title },
     });
-
-    // console.log(findUpdate, '12313123123123213');
-    // const result = await this.updateRepository.save({
-    //   ...findUpdate,
-    //   ...UpdateBoardInput,
-    // });
-    // console.log(result, '===================');
-
-    const result = await this.updateRepository.save({
-      ...findUpdate,
-      ...UpdateBoardInput,
-    });
-    console.log('---------------');
+    console.log(findUpdate);
+    const result = await this.updateRepository.update(
+      {
+        id: findUpdate.id,
+      },
+      {
+        ...UpdateBoardInput,
+      },
+    );
     console.log(result);
     return result;
   }
+  // const date = new Date();
+  // const yyyy = date.getFullYear();
+  // const mm = String(date.getMonth() + 1).padStart(2, '0');
+  // const dd = String(date.getDate()).padStart(2, '0');
+  // const currentDate = `${yyyy}-${mm}-${dd}`;
+
+  // const result = await this.updateRepository.save({
+  //   id: data.id,
+  //   name: data.name,
+  //   title: data.title,
+  //   content: data.content,
+  //   createdAt: currentDate,
+  // });
+  // console.log('---------------');
+  // console.log(data);
+  // console.log(result);
 }

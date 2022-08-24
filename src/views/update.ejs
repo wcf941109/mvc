@@ -40,16 +40,20 @@
     </header>
 
     <div class="title">
-      <class="title" id="title">게시글 수정</class>
+      <class="title" id="updateboard">게시글 수정</class>
   </div>
 
     <div class="write_wrap">
       <form action="" method="post">
         <div class="write">
-          <label for="title">제목</label>
-          <input id="title" value="<%=data.title%>" type="text" />
+          <label for="title">번호</label>
+          <class id="id" value="<%=data.id%>" type="text"><%=data.id%></class>
         </div>
-        <div class="name">
+        <div class="write">
+          <label for="title">제목</label>
+          <input id="title" readonly class="title2" value="<%=data.title%>" type="text" />
+        </div>
+        <div class="write">
           <label for="name">작성자</label>
           <input id="name" value="<%=data.name%>" type="text" />
         </div>
