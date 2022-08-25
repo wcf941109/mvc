@@ -17,4 +17,15 @@ export class BoardDetailService {
       },
     });
   }
+
+  async delete({ res }) {
+    const findDelete = await this.boarddetailRepository.findOne({
+      where: { title: res.title },
+    });
+    const result = await this.boarddetailRepository.softDelete(findDelete);
+    console.log('-------------');
+    console.log(res);
+    console.log(result);
+    return result.affected ? true : false;
+  }
 }

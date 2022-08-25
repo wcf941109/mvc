@@ -48,9 +48,9 @@
       </article>
   </section>
   <section class="section01">
-    <div class="title">
+    <div class="">
       <h2>
-        <td><%=data.title%></td>
+        <td id="title" value="<%=data.title%>" type="text"><%=data.title%></td>
       </h2>
     </div>
     <div class="type">
@@ -58,11 +58,14 @@
         <tbody>
           <tr>
             <td>번호</td>
-            <td><%=data.id%></td>
+            <!-- <input id="id" readonly class="title2" value="<%=data.id%>" type="text"/> -->
+
+            <td id="id" value="<%=data.id%>" type="text"><%=data.id%></td>
             <td>작성자</td>
-            <td><%=data.name%></td>
+
+            <td id="name" value="<%=data.name%>" type="text"><%=data.name%></td>
             <td>작성일자</td>
-            <td><%=data.createdAt%></td>
+            <td id="createdAt" value="<%=data.createdAt%>" type="text"><%=data.createdAt%></td>
 
           </tr>
         </tbody>

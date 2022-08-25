@@ -7,6 +7,7 @@ import {
   Post,
   Put,
   Render,
+  Req,
 } from '@nestjs/common';
 import { BoardService } from './board.service';
 
@@ -28,15 +29,10 @@ export class BoardController {
     return await this.boardService.create(data);
   }
 
-  // @Put('update')
-  // async update(@Body() data) {
-  //   return await this.boardService.update(data);
+  // @Delete('/board_detail/update/:id')
+  // async deleteBoard(@Param('id') id: string) {
+  //   return await this.boardService.delete({ id });
   // }
-
-  @Post('/board')
-  async delete(@Body() data) {
-    return await this.boardService.delete(data);
-  }
 
   @Get('/write')
   @Render('write')
@@ -48,9 +44,4 @@ export class BoardController {
     const result = await this.boardService.findOne(id);
     return { data: result };
   }
-
-  // @Post('/board_detail/update/:id')
-  // async updateData(@Body() data) {
-  //   return await this.boardService.update(data);
-  // }
 }

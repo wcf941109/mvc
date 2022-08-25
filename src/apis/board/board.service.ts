@@ -52,12 +52,10 @@ export class BoardService {
     // }
   }
 
-  async delete(data) {
-    const result = await this.boardRepository.softDelete({
-      name: data.name,
-      title: data.title,
-      content: data.content,
-    });
-    return result.affected ? true : false;
+  async delete({ id }) {
+    const result = await this.boardRepository.softDelete({ id });
+    console.log('dsdasdasdads');
+    return result;
+    // return result.affected ? true : false;
   }
 }
