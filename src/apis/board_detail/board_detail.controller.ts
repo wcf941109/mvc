@@ -23,9 +23,11 @@ export class BoardDetailController {
     return { data: result };
   }
 
-  @Delete('/:id')
-  async deleteBoard(@Res() res) {
-    const result = await this.boarddetailService.delete({ res });
-    return { data: result };
+  @Delete('/')
+  async deleteBoard(@Body() data) {
+    console.log(data, '1111111111');
+    const result = await this.boarddetailService.delete(data);
+    console.log(result, '22222222222');
+    return result;
   }
 }

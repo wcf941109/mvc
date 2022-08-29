@@ -18,14 +18,11 @@ export class BoardDetailService {
     });
   }
 
-  async delete({ res }) {
-    const findDelete = await this.boarddetailRepository.findOne({
-      where: { title: res.title },
-    });
-    const result = await this.boarddetailRepository.softDelete(findDelete);
+  async delete(data) {
+    const result = await this.boarddetailRepository.softDelete({ id: data.id });
     console.log('-------------');
-    console.log(res);
-    console.log(result);
-    return result.affected ? true : false;
+    console.log(data);
+    return result;
+    // eturn result.affected ? true : false;
   }
 }

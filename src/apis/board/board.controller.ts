@@ -38,6 +38,10 @@ export class BoardController {
   @Render('write')
   write() {}
 
+  @Get('/login')
+  @Render('login')
+  async login() {}
+
   @Get('/board_detail/update/:id')
   @Render('update')
   async detail(@Param('id') id: string) {
