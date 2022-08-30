@@ -1,7 +1,6 @@
 import {
   Column,
   CreateDateColumn,
-  DeleteDateColumn,
   Entity,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -13,22 +12,18 @@ export class User {
   id: string;
 
   @Column()
-  userId: string;
+  nickname: string;
 
   @Column()
   email: string;
 
   @Column()
-  content: string;
-
-  @Column()
-  password: string;
+  pwd: string;
 
   @Column()
   phone: string;
 
-  // @Transform((createdAt) => moment(createdAt).format('YYYY/MM/DD'))
-  @Column()
+  @CreateDateColumn()
   createdAt: string;
 
   @UpdateDateColumn()

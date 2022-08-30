@@ -24,11 +24,9 @@ export class UserService {
     });
   }
 
-  async create({ pwd, userInfo }) {
-    return await this.userRepository.save({
-      ...userInfo,
-      pwd,
-    });
+  async create(data) {
+    console.log('----------');
+    return await this.userRepository.save(data);
   }
 
   // async update(data) {

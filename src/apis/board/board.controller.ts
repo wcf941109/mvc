@@ -38,9 +38,13 @@ export class BoardController {
   @Render('write')
   write() {}
 
-  @Get('/login')
-  @Render('login')
-  async login() {}
+  @Get('/findid')
+  @Render('findid')
+  async findid() {}
+
+  @Get('/findpw')
+  @Render('findpw')
+  async findpw() {}
 
   @Get('/board_detail/update/:id')
   @Render('update')

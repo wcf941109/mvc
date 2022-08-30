@@ -11,24 +11,22 @@ import { CreateUserInput } from './dto/createUser.input';
 import { UserService } from './user.service';
 import * as bcrypt from 'bcrypt';
 
-@Controller('/signup')
+@Controller('')
 export class UserController {
   constructor(
     private readonly userService: UserService, //
   ) {}
 
-  @Get('/')
-  @Render('signup')
+  @Get('/signUpUser')
+  @Render('signUpUser')
   sign() {}
 
-  @Get('/signup')
-  async createUser(
-    @Body() createUserInput: CreateUserInput, //
-  ) {
-    const { pwd, ...userInfo } = createUserInput;
-    console.log('1111111111');
+  @Post('/signUpUser')
+  async createUser(@Body() data) {
+    // const { pwd, ...userInfo } = createUserInput;
+    console.log(data, '1111111111');
 
-    const hashedPassword = await bcrypt.hash(pwd, 10);
-    return this.userService.create({ pwd: hashedPassword, userInfo });
+    // const hashedPassword = await bcrypt.hash(pwd, 10);
+    return this.userService.create(data);
   }
 }
