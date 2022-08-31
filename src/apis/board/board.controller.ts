@@ -34,6 +34,10 @@ export class BoardController {
   //   return await this.boardService.delete({ id });
   // }
 
+  @Get('/login')
+  @Render('login')
+  login() {}
+
   @Get('/write')
   @Render('write')
   write() {}
