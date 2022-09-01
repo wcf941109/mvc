@@ -12,6 +12,8 @@ function signUp() {
       phone,
     })
     .then((res) => {
+      const div = document.createElement('div');
+
       div.innerText = res.data.nickname;
       div.innerText = res.data.email;
       div.innerText = res.data.pwd;

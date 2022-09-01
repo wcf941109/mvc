@@ -22,11 +22,12 @@ export class UserController {
   sign() {}
 
   @Post('/signUpUser')
-  async createUser(@Body() data) {
-    // const { pwd, ...userInfo } = createUserInput;
-    console.log(data, '1111111111');
-
-    // const hashedPassword = await bcrypt.hash(pwd, 10);
-    return this.userService.create(data);
+  async createUser(
+    // @Body() createUserInput: CreateUserInput, //
+    @Body() data,
+  ) {
+    const { pwd, ...userdata } = data;
+    const hashedPwd = await bcrypt.hash(pwd, 10);
+    return this.userService.create({ hashedPwd, data });
   }
 }

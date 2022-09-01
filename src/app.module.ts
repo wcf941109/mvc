@@ -7,6 +7,7 @@ import { HomeModule } from './apis/home/home.module';
 import { IntroduceModule } from './apis/introduce/introduce.module';
 import { ShootingModule } from './apis/shooting/shooting.module';
 import { UpdateModule } from './apis/update/update.module';
+import { User } from './apis/user/entities/user.entity';
 import { UserModule } from './apis/user/user.module';
 
 @Module({
@@ -31,5 +32,7 @@ import { UserModule } from './apis/user/user.module';
       logging: true,
     }),
   ],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {}

@@ -12,19 +12,17 @@ import { Cache } from 'cache-manager';
 @Injectable()
 export class AuthService {
   constructor(
-    private readonly jwtService: JwtService, //
-    @Inject(CACHE_MANAGER)
-    private readonly cacheMananger: Cache,
+    private readonly jwtService: JwtService, // // @Inject(CACHE_MANAGER) // private readonly cacheMananger: Cache,
   ) {}
 
-  setRefreshToken({ user, res, req }) {
+  setRefreshToken({ findUser, res, req }) {
     const refreshToken = this.jwtService.sign(
       {
-        nickname: user.nickname,
-        id: user.id,
-        email: user.email,
-        pwd: user.pwd,
-        phone: user.phone,
+        nickname: findUser.nickname,
+        id: findUser.id,
+        email: findUser.email,
+        pwd: findUser.pwd,
+        phone: findUser.phone,
       },
       { secret: process.env.REFRESH_TOKEN_KEY, expiresIn: '24h' },
     );
@@ -67,36 +65,36 @@ export class AuthService {
     );
   }
 
-  async saveToken({ accessToken, refreshToken }) {
-    const verifyAccess: any = jwt.verify(
-      accessToken,
-      process.env.ACCESS_TOKEN_KEY,
-    );
-    const verifyRefresh: any = jwt.verify(
-      refreshToken,
-      process.env.REFRESH_TOKEN_KEY,
-    );
+  // async saveToken({ accessToken, refreshToken }) {
+  //   const verifyAccess: any = jwt.verify(
+  //     accessToken,
+  //     process.env.ACCESS_TOKEN_KEY,
+  //   );
+  //   const verifyRefresh: any = jwt.verify(
+  //     refreshToken,
+  //     process.env.REFRESH_TOKEN_KEY,
+  //   );
 
-    try {
-      // 토큰 저장
-      const saveAccess = await this.cacheMananger.set(
-        `accessToken:${accessToken}`,
-        'accessToken',
-        {
-          ttl: verifyAccess.exp - verifyAccess.iat,
-        },
-      );
-      const saveRefresh = await this.cacheMananger.set(
-        `refreshToken:${refreshToken}`,
-        'refreshToken',
-        {
-          ttl: verifyRefresh.exp - verifyRefresh.iat,
-        },
-      );
+  //   try {
+  //     // 토큰 저장
+  //     const saveAccess = await this.cacheMananger.set(
+  //       `accessToken:${accessToken}`,
+  //       'accessToken',
+  //       {
+  //         ttl: verifyAccess.exp - verifyAccess.iat,
+  //       },
+  //     );
+  //     const saveRefresh = await this.cacheMananger.set(
+  //       `refreshToken:${refreshToken}`,
+  //       'refreshToken',
+  //       {
+  //         ttl: verifyRefresh.exp - verifyRefresh.iat,
+  //       },
+  //     );
 
-      if (saveAccess === 'OK' && saveRefresh === 'OK') return true;
-    } catch (error) {
-      throw new ConflictException('토큰을 저장하지 못했습니다!!', error);
-    }
-  }
+  //     if (saveAccess === 'OK' && saveRefresh === 'OK') return true;
+  //   } catch (error) {
+  //     throw new ConflictException('토큰을 저장하지 못했습니다!!', error);
+  //   }
+  // }
 }

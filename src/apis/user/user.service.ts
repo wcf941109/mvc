@@ -1,6 +1,7 @@
 import { ConflictException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { CreateUserInput } from './dto/createUser.input';
 import { User } from './entities/user.entity';
 
 @Injectable()
@@ -16,17 +17,32 @@ export class UserService {
     });
   }
 
-  async findOne(id) {
+  async findOne({ data }) {
     return await this.userRepository.findOne({
       where: {
-        id,
+        nickname: data.nickname,
       },
     });
   }
 
-  async create(data) {
-    console.log('----------');
-    return await this.userRepository.save(data);
+  async create({ hashedPwd, data }) {
+    const { nickname, ...items } = data;
+    const checkuser = await this.userRepository.findOne({
+      where: {
+        nickname,
+      },
+    });
+    console.log(checkuser, '111111');
+    console.log(nickname, '2222222');
+    console.log(data.nickname, '3333333');
+
+    if (checkuser) throw new ConflictException('이미 등록된 유저입니다.');
+
+    const result = await this.userRepository.save({
+      ...data,
+      pwd: hashedPwd,
+    });
+    return result;
   }
 
   // async update(data) {
