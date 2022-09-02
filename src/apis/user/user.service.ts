@@ -20,7 +20,7 @@ export class UserService {
   async findOne({ data }) {
     return await this.userRepository.findOne({
       where: {
-        nickname: data.nickname,
+        nickname: data,
       },
     });
   }
@@ -29,13 +29,9 @@ export class UserService {
     const { nickname, ...items } = data;
     const checkuser = await this.userRepository.findOne({
       where: {
-        nickname,
+        nickname: data.nickname,
       },
     });
-    console.log(checkuser, '111111');
-    console.log(nickname, '2222222');
-    console.log(data.nickname, '3333333');
-
     if (checkuser) throw new ConflictException('이미 등록된 유저입니다.');
 
     const result = await this.userRepository.save({

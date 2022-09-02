@@ -2,6 +2,9 @@ import { CACHE_MANAGER, Inject, UnauthorizedException } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { Strategy } from 'passport-jwt';
 import { Cache } from 'cache-manager';
+import * as dotenv from 'dotenv';
+
+dotenv.config();
 
 export class JwtRefreshStrategy extends PassportStrategy(Strategy, 'refresh') {
   constructor(
@@ -33,9 +36,8 @@ export class JwtRefreshStrategy extends PassportStrategy(Strategy, 'refresh') {
       throw new UnauthorizedException('로그인 후 사용해주세요!');
 
     return {
-      email: payload.email,
+      nickname: payload.nickname,
       id: payload.id,
-      isserviceprovider: payload.isserviceprovider,
     };
   }
 }

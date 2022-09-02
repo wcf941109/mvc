@@ -20,9 +20,9 @@ function signUp() {
       div.innerText = res.data.phone;
     });
 
-  // fetch('/login').then(function () {
-  //   window.location = '/login';
-  // });
+  fetch('/login').then(function () {
+    window.location = '/login';
+  });
 }
 
 document.getElementById('getLogin').addEventListener('click', () => {

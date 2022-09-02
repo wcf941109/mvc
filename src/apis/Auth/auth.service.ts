@@ -8,6 +8,9 @@ import {
 import { JwtService } from '@nestjs/jwt';
 import * as jwt from 'jsonwebtoken';
 import { Cache } from 'cache-manager';
+import * as dotenv from 'dotenv';
+
+dotenv.config();
 
 @Injectable()
 export class AuthService {
@@ -15,27 +18,28 @@ export class AuthService {
     private readonly jwtService: JwtService, // // @Inject(CACHE_MANAGER) // private readonly cacheMananger: Cache,
   ) {}
 
-  setRefreshToken({ findUser, res, req }) {
+  setRefreshToken({ user, res, req }) {
     const refreshToken = this.jwtService.sign(
       {
-        nickname: findUser.nickname,
-        id: findUser.id,
-        email: findUser.email,
-        pwd: findUser.pwd,
-        phone: findUser.phone,
+        nickname: user.nickname,
       },
       { secret: process.env.REFRESH_TOKEN_KEY, expiresIn: '24h' },
     );
-    const whiteList = ['http://localhost:3000'];
+    console.log(refreshToken, '리프레쉬토큰1');
+    const whiteList = ['http://localhost:3000/'];
     const origin = req.headers.origin;
     if (whiteList.includes(origin)) {
       res.setHeader('Access-Control-Allow-Origin', origin);
     }
     res.setHeader('Access-Control-Allow-Credentials', 'true');
-    res.setHeader('Access-Control-Allow-Methods', 'POST, GET');
+    res.setHeader('Access-Control-Allow-Methods', 'POST, GET, FETCH');
     res.setHeader(
       'Set-Cookie',
-      `refreshToken=${refreshToken}; path=/; domain=.wawoong.shop; SameSite=None; Secure; httpOnly;`,
+      `refreshToken=${refreshToken}; path=/; domain=localhost:3000; SameSite=None; Secure; httpOnly;`,
+    );
+    res.cookie(
+      'Set-Cookie',
+      `refreshToken=${refreshToken}; path=/; domain=localhost:3000; SameSite=None; Secure; httpOnly;`,
     );
   }
   validationToken({ accessToken, refreshToken }) {
