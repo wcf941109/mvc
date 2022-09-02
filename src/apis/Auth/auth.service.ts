@@ -37,10 +37,6 @@ export class AuthService {
       'Set-Cookie',
       `refreshToken=${refreshToken}; path=/; domain=localhost:3000; SameSite=None; Secure; httpOnly;`,
     );
-    res.cookie(
-      'Set-Cookie',
-      `refreshToken=${refreshToken}; path=/; domain=localhost:3000; SameSite=None; Secure; httpOnly;`,
-    );
   }
   validationToken({ accessToken, refreshToken }) {
     try {
