@@ -29,9 +29,8 @@ export class JwtAccessStreategy extends PassportStrategy(Strategy, 'access') {
       throw new UnauthorizedException('로그인 후 사용해주세요!');
 
     return {
-      email: payload.email, //
+      nickname: payload.nickname,
       id: payload.id,
-      isserviceprovider: payload.isserviceprovider,
     };
   }
 }

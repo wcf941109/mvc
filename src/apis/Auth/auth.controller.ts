@@ -34,7 +34,7 @@ export class AuthController {
     @Res() res: Response,
   ) {
     // 1. 로그인 @@
-    console.log(data);
+    console.log(data, '인풋데이터');
     const nickname = data.data[0];
     const pwd = data.data[1];
     const user = await this.userService.findOne({ data: nickname });
@@ -45,16 +45,24 @@ export class AuthController {
     const isAuth = await bcrypt.compare(pwd, user.pwd);
     console.log(isAuth, '333333333333333');
 
-    // 4. refreshToken(=JWT)을 만들어서 프론트엔드(쿠키)에 보내주기
-    const bbb = this.authService.setRefreshToken({
+    if (!isAuth)
+      throw new UnprocessableEntityException('비밀번호가 일치하지 않습니다.');
+    await this.authService.setRefreshToken({
       user,
       res,
       req,
     });
 
+    // // 4. refreshToken(=JWT)을 만들어서 프론트엔드(쿠키)에 보내주기
+    // const bbb = this.authService.setRefreshToken({
+    //   user,
+    //   res,
+    //   req,
+    // });
+
     // 5. 일치하는 유저가 있으면?! accessToken(=JWT)을 만들어서 브라우저에 전달하기
-    const aaa = this.authService.getAccessToken({ user: user });
-    console.log(aaa, '엑세스토큰');
-    return 'aaa';
+    const accessToken = this.authService.getAccessToken({ user: user });
+    console.log(accessToken, '1-1-1-1-1-1-1-1');
+    res.send(accessToken);
   }
 }

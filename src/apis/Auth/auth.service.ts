@@ -31,11 +31,12 @@ export class AuthService {
     if (whiteList.includes(origin)) {
       res.setHeader('Access-Control-Allow-Origin', origin);
     }
-    res.setHeader('Access-Control-Allow-Credentials', 'true');
-    res.setHeader('Access-Control-Allow-Methods', 'POST, GET, FETCH');
+    // res.setHeader('Access-Control-Allow-Credentials', 'true');
+    // res.setHeader('Access-Control-Allow-Methods', 'POST, GET, FETCH');
     res.setHeader(
       'Set-Cookie',
-      `refreshToken=${refreshToken}; path=/; domain=localhost:3000; SameSite=None; Secure; httpOnly;`,
+      `refreshToken=${refreshToken}`,
+      // path=/; domain=localhost:3000; SameSite=None; Secure; httpOnly;,
     );
   }
   validationToken({ accessToken, refreshToken }) {
@@ -56,10 +57,6 @@ export class AuthService {
     return this.jwtService.sign(
       {
         nickname: user.nickname,
-        id: user.id,
-        email: user.email,
-        pwd: user.pwd,
-        phone: user.phone,
       },
       { secret: process.env.ACCESS_TOKEN_KEY, expiresIn: '1h' },
     );
