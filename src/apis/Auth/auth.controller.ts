@@ -35,8 +35,9 @@ export class AuthController {
   ) {
     // 1. 로그인 @@
     console.log(data, '인풋데이터');
-    const nickname = data.data[0];
-    const pwd = data.data[1];
+    const nickname = data.nickname;
+    const pwd = data.pwd;
+
     const user = await this.userService.findOne({ data: nickname });
     if (!user) {
       throw new UnprocessableEntityException('아이디가 없습니다.');
