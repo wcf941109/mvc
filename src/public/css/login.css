@@ -107,7 +107,7 @@ form {
   display: flex;
   justify-content: center;
   align-content: center;
-  margin-top: 5%;
+  /* margin-top: 5%; */
 }
 
 .login {
@@ -138,6 +138,19 @@ form {
   justify-content: space-between;
   height: 230px;
   margin-top: 20px;
+}
+
+.find1 {
+  display: flex;
+  justify-content: space-between;
+}
+
+.find1 a {
+  margin: 20px 0px;
+
+  font-size: 14px;
+  cursor: pointer;
+  text-decoration: underline;
 }
 
 .check button {
@@ -298,7 +311,7 @@ form {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 305px;
+  height: 250;
   margin-top: 20px;
 }
 

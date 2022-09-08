@@ -44,7 +44,15 @@ export class AuthController {
     }
 
     const isAuth = await bcrypt.compare(pwd, user.pwd);
+    console.log(pwd, '1111111111');
+    console.log(user.pwd, '222222222');
+
     console.log(isAuth, '333333333333333');
+
+    // if (pwd === user.pwd) {
+    //   return '맞음';
+    // }
+    // return '틀림';
 
     if (!isAuth)
       throw new UnprocessableEntityException('비밀번호가 일치하지 않습니다.');
@@ -55,7 +63,7 @@ export class AuthController {
     });
 
     // // 4. refreshToken(=JWT)을 만들어서 프론트엔드(쿠키)에 보내주기
-    // const bbb = this.authService.setRefreshToken({
+    // await this.authService.setRefreshToken({
     //   user,
     //   res,
     //   req,
