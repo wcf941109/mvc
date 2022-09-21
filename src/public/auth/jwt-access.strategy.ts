@@ -5,8 +5,8 @@ import { Cache } from 'cache-manager';
 
 export class JwtAccessStreategy extends PassportStrategy(Strategy, 'access') {
   constructor(
-    @Inject(CACHE_MANAGER)
-    private readonly cacheManager: Cache, //
+    @Inject(CACHE_MANAGER) //
+    private readonly cacheManager: Cache,
   ) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(), //

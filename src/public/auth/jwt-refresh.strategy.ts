@@ -7,10 +7,9 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 
 export class JwtRefreshStrategy extends PassportStrategy(Strategy, 'refresh') {
-  constructor(
-    @Inject(CACHE_MANAGER)
-    private readonly cacheManager: Cache, //
-  ) {
+  constructor() // @Inject(CACHE_MANAGER)
+  // private readonly cacheManager: Cache, //
+  {
     super({
       jwtFromRequest: (req) => {
         try {

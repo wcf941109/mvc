@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { CacheModule, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { BoardModule } from './apis/\bboard/board.module';
 import { AuthModule } from './apis/Auth/auth.module';
@@ -9,6 +9,8 @@ import { ShootingModule } from './apis/shooting/shooting.module';
 import { UpdateModule } from './apis/update/update.module';
 import { User } from './apis/user/entities/user.entity';
 import { UserModule } from './apis/user/user.module';
+import * as redisStore from 'cache-manager';
+import { RedisClientOptions } from 'redis';
 
 @Module({
   imports: [
@@ -30,6 +32,11 @@ import { UserModule } from './apis/user/user.module';
       entities: [__dirname + '/apis/**/*.entity.*'],
       synchronize: true,
       logging: true,
+    }),
+    CacheModule.register<RedisClientOptions>({
+      store: redisStore,
+      url: 'redis://localhost:3000',
+      isGlobal: true,
     }),
   ],
   controllers: [],

@@ -2,18 +2,21 @@ import {
   Body,
   CACHE_MANAGER,
   Controller,
+  Get,
   Inject,
   Param,
   Post,
   Req,
   Res,
   UnprocessableEntityException,
+  UseGuards,
 } from '@nestjs/common';
 import { UserService } from '../user/user.service';
 import { AuthService } from './auth.service';
 import * as bcrypt from 'bcrypt';
 import { Cache } from 'cache-manager';
 import { Request, Response } from 'express';
+import { AuthGuard } from '@nestjs/passport';
 
 // interface IContext {
 //   req: Request;
@@ -24,7 +27,9 @@ import { Request, Response } from 'express';
 export class AuthController {
   constructor(
     private readonly authService: AuthService, //
-    private readonly userService: UserService, // @Inject(CACHE_MANAGER) // private readonly cacheManager: Cache,
+    private readonly userService: UserService,
+    @Inject(CACHE_MANAGER)
+    private readonly cacheManager: Cache,
   ) {}
 
   @Post('/login')
@@ -44,8 +49,6 @@ export class AuthController {
     }
 
     const isAuth = await bcrypt.compare(pwd, user.pwd);
-    console.log(pwd, '1111111111');
-    console.log(user.pwd, '222222222');
 
     console.log(isAuth, '333333333333333');
 
@@ -73,5 +76,64 @@ export class AuthController {
     const accessToken = this.authService.getAccessToken({ user: user });
     console.log(accessToken, '1-1-1-1-1-1-1-1');
     res.send(accessToken);
+  }
+
+  @Get('/login/google')
+  @UseGuards(AuthGuard('google'))
+  async loginGoogle(
+    @Req() req: Request, //
+    @Res() res: Response,
+  ) {
+    await this.authService.getUserInfo(req, res);
+  }
+
+  @Get('/login/naver')
+  @UseGuards(AuthGuard('naver'))
+  async loginNaver(
+    @Req() req: Request, //
+    @Res() res: Response,
+  ) {
+    await this.authService.getUserInfo(req, res);
+  }
+
+  @Get('/login/kakao')
+  @UseGuards(AuthGuard('kakao'))
+  async loginKakao(
+    @Req() req: Request, //
+    @Res() res: Response,
+  ) {
+    await this.authService.getUserInfo(req, res);
+  }
+  @Get('')
+  async logout(
+    @Req() req: Request, //
+    @Res() res: Response,
+  ) {
+    const headersAuthoriztion = req.headers.authorization;
+
+    const headersCookie = req.headers.cookie;
+
+    if (!headersAuthoriztion)
+      throw new UnprocessableEntityException('소셜 엑세스 토큰이 없습니다!!');
+    if (!headersCookie)
+      throw new UnprocessableEntityException('소셜 리프레쉬 토큰이 없습니다!!');
+
+    const accessToken = req.headers.authorization.replace('Bearer ', '');
+    const refreshToken = req.headers.cookie.replace('refreshToken=', '');
+
+    const isValidation = this.authService.validationToken({
+      accessToken,
+      refreshToken,
+    });
+
+    if (isValidation) {
+      const isSave = this.authService.saveToken({ accessToken, refreshToken });
+
+      if (isSave) {
+        return '로그아웃에 성공했습니다.';
+      }
+    }
+
+    return '로그아웃 실패!!';
   }
 }

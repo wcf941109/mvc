@@ -7,6 +7,9 @@ import { UserService } from '../user/user.service';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import * as dotenv from 'dotenv';
+import { JwtGoogleStrategy } from 'src/public/auth/jwt-social-google.strategy';
+import { JwtNaverStrategy } from 'src/public/auth/jwt-social-naver.strategy';
+import { JwtKaKaoStrategy } from 'src/public/auth/jwt-social-kakao.strategy';
 
 dotenv.config();
 
@@ -17,7 +20,15 @@ dotenv.config();
     }), //
     TypeOrmModule.forFeature([User]),
   ],
-  providers: [AuthService, UserService],
+  providers: [
+    AuthService, //
+    UserService,
+    JwtService,
+    JwtRefreshStrategy,
+    JwtGoogleStrategy,
+    JwtKaKaoStrategy,
+    JwtNaverStrategy,
+  ],
   controllers: [AuthController],
 })
 export class AuthModule {}

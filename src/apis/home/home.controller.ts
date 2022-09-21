@@ -21,7 +21,7 @@ export class HomeController {
     @Req() req: Request, //
   ) {
     let accessToken = '';
-    console.log(req.headers.cookie, '-------------');
+    console.log(req, '쿠키-------------');
     if (req.headers.cookie) {
       accessToken = req.headers.cookie.split('refreshToken=')[1];
     } else {
