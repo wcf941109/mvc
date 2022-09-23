@@ -20,16 +20,16 @@ export class UserService {
   async findOne({ data }) {
     return await this.userRepository.findOne({
       where: {
-        nickname: data,
+        name: data,
       },
     });
   }
 
   async create({ hashedPwd, data }) {
-    const { nickname, ...items } = data;
+    const { name, ...items } = data;
     const checkuser = await this.userRepository.findOne({
       where: {
-        nickname: data.nickname,
+        name: data.name,
       },
     });
     if (checkuser) throw new ConflictException('이미 등록된 유저입니다.');

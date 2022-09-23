@@ -40,8 +40,8 @@
             <li><a href="/board">자유게시판</a></li>
           <li><a href="/shooting">슈팅 관련</a></li>
           <li>  <div class="loginId">
-            <% if(nickname){%>
-            <div><%=nickname%>님 환영합니다</div>
+            <% if(name){%>
+            <div><%=name%>님 환영합니다</div>
             <span
               ><a href="/logout"
                 ><i class="fa-solid fa-right-from-bracket"></i></a
@@ -63,7 +63,7 @@
 
         <div class="write" style="display:none">
           <label for="name">작성자</label>
-          <input id="nickname" readonly class="title2" value="<%=nickname%>" type="text"  />
+          <input id="name" readonly class="title2" value="<%=name%>" type="text"  />
           </div>
         <div class="write">
           <label for="title">제목</label>

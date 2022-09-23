@@ -32,7 +32,7 @@ export class AuthService {
   //
   token({ user, res, req }) {
     const refreshToken = this.jwtService.sign(
-      { nickname: user.nickname },
+      { name: user.name },
       { secret: process.env.REFRESH_TOKEN_KEY, expiresIn: '24h' },
     );
     console.log(refreshToken, '리프레쉬토큰1');
@@ -47,7 +47,7 @@ export class AuthService {
   getAccessToken({ user }) {
     return this.jwtService.sign(
       {
-        nickname: user.nickname,
+        name: user.name,
       },
       { secret: process.env.ACCESS_TOKEN_KEY, expiresIn: '1h' },
     );
@@ -63,7 +63,7 @@ export class AuthService {
     if (!user) {
       user = await this.userRepository.save({
         email: req.user.email,
-        nickname: req.user.nickname,
+        name: req.user.name,
       });
     }
 
@@ -75,9 +75,9 @@ export class AuthService {
   async logout({ req, res }) {
     const token = req.headers.cookie.replace('refreshToken=', '');
     try {
-      jwt.verify(token, 'myRefreshkey');
+      jwt.verify(token, process.env.REFRESH_TOKEN_KEY);
       res.cookie('refreshToken', '');
-      res.redirect('http://localhost:3000/login');
+      res.redirect('http://localhost:3000/home');
       return '로그아웃 성공';
     } catch {
       throw new UnauthorizedException();

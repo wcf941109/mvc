@@ -6,6 +6,7 @@ import {
   Inject,
   Param,
   Post,
+  Render,
   Req,
   Res,
   UnprocessableEntityException,
@@ -40,10 +41,10 @@ export class AuthController {
   ) {
     // 1. 로그인 @@
     console.log(data, '인풋데이터');
-    const nickname = data.nickname;
+    const name = data.name;
     const pwd = data.pwd;
 
-    const user = await this.userService.findOne({ data: nickname });
+    const user = await this.userService.findOne({ data: name });
     if (!user) {
       throw new UnprocessableEntityException('아이디가 없습니다.');
     }
@@ -101,7 +102,8 @@ export class AuthController {
   ) {
     await this.authService.getUserInfo(req, res);
   }
-  @Get('/')
+  @Get('/logout')
+  @Render('logout')
   async logout(@Req() req: Request, @Res() res: Response) {
     const result = await this.authService.logout({ req, res });
     console.log(result);

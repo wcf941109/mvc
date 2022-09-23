@@ -36,7 +36,7 @@ export class JwtRefreshStrategy extends PassportStrategy(Strategy, 'refresh') {
       throw new UnauthorizedException('로그인 후 사용해주세요!');
 
     return {
-      nickname: payload.nickname,
+      name: payload.name,
       id: payload.id,
     };
   }

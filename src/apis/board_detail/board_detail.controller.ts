@@ -29,15 +29,15 @@ export class BoardDetailController {
     if (req.headers.cookie) {
       accessToken = req.headers.cookie.split('refreshToken=')[1];
     } else {
-      return { nickname: '', data: result };
+      return { name: '', data: result };
     }
     if (accessToken === '') {
-      return { nickname: '', data: result };
+      return { name: '', data: result };
     } else if (accessToken !== undefined) {
       const checkToken = jwt.verify(accessToken, process.env.REFRESH_TOKEN_KEY);
-      return { nickname: checkToken['nickname'], data: result };
+      return { name: checkToken['name'], data: result };
     } else {
-      return { nickname: '', data: result };
+      return { name: '', data: result };
     }
   }
 

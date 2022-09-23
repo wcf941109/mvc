@@ -24,15 +24,15 @@ export class HomeController {
     if (req.headers.cookie) {
       accessToken = req.headers.cookie.split('refreshToken=')[1];
     } else {
-      return { nickname: '' };
+      return { name: '' };
     }
     if (accessToken === '') {
-      return { nickname: '' };
+      return { name: '' };
     } else if (accessToken !== undefined) {
       const checkToken = jwt.verify(accessToken, process.env.REFRESH_TOKEN_KEY);
-      return { nickname: checkToken['nickname'] };
+      return { name: checkToken['name'] };
     } else {
-      return { nickname: '' };
+      return { name: '' };
     }
   }
 }

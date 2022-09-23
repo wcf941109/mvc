@@ -2,7 +2,7 @@ import { Column } from 'typeorm';
 
 export class UpdateUserInput {
   @Column()
-  nickname: string;
+  name: string;
 
   @Column()
   email: string;
