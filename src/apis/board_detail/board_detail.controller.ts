@@ -8,7 +8,9 @@ import {
   Req,
   Res,
 } from '@nestjs/common';
+import { Request } from 'express';
 import { BoardDetailService } from './board_detail.service';
+import * as jwt from 'jsonwebtoken';
 
 @Controller('board_detail')
 export class BoardDetailController {
@@ -18,9 +20,25 @@ export class BoardDetailController {
 
   @Get('/:id')
   @Render('board_detail')
-  async detail(@Param('id') id: string) {
+  async detail(
+    @Param('id') id: string, //
+    @Req() req: Request, //
+  ) {
     const result = await this.boarddetailService.findOne(id);
-    return { data: result };
+    let accessToken = '';
+    if (req.headers.cookie) {
+      accessToken = req.headers.cookie.split('refreshToken=')[1];
+    } else {
+      return { nickname: '', data: result };
+    }
+    if (accessToken === '') {
+      return { nickname: '', data: result };
+    } else if (accessToken !== undefined) {
+      const checkToken = jwt.verify(accessToken, process.env.REFRESH_TOKEN_KEY);
+      return { nickname: checkToken['nickname'], data: result };
+    } else {
+      return { nickname: '', data: result };
+    }
   }
 
   @Delete('/')

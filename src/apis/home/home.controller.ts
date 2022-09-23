@@ -15,7 +15,7 @@ export class HomeController {
   //   return { data: result };
   // }
 
-  @Get('/')
+  @Get('/home')
   @Render('home')
   async home(
     @Req() req: Request, //
@@ -29,7 +29,7 @@ export class HomeController {
     if (accessToken === '') {
       return { nickname: '' };
     } else if (accessToken !== undefined) {
-      const checkToken = jwt.verify(accessToken, 'myRefreshkey');
+      const checkToken = jwt.verify(accessToken, process.env.REFRESH_TOKEN_KEY);
       return { nickname: checkToken['nickname'] };
     } else {
       return { nickname: '' };

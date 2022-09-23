@@ -4,7 +4,7 @@ export class CreateBoardInput {
   @Column()
   name: string;
 
-  @Column()
+  @Column({ default: ' ' })
   title: string;
 
   @Column()

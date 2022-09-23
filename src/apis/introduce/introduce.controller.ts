@@ -9,27 +9,23 @@ export class MainController {
 
   @Get('/')
   @Render('introduce')
-  async introduce() {}
-
-  @Post('/')
-  @Render('introduce')
-  async home(
+  async introduce(
     @Req() req: Request, //
   ) {
     let accessToken = '';
-    console.log(req);
-    // if (req.headers.cookie) {
-    //   accessToken = req.headers.cookie.split('refreshToken=')[1];
-    // } else {
-    //   return { nickname: '' };
-    // }
-    // if (accessToken === '') {
-    //   return { nickname: '' };
-    // } else if (accessToken !== undefined) {
-    //   const checkToken = jwt.verify(accessToken, 'myRefreshkey');
-    //   return { nickname: checkToken['nickname'] };
-    // } else {
-    //   return { nickname: '' };
-    // }
+    if (req.headers.cookie) {
+      accessToken = req.headers.cookie.split('refreshToken=')[1];
+    } else {
+      return { nickname: '' };
+    }
+
+    if (accessToken === '') {
+      return { nickname: '' };
+    } else if (accessToken !== undefined) {
+      const checkToken = jwt.verify(accessToken, process.env.REFRESH_TOKEN_KEY);
+      return { nickname: checkToken['nickname'] };
+    } else {
+      return { nickname: '' };
+    }
   }
 }

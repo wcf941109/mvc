@@ -59,7 +59,6 @@ export class AuthController {
       res,
       req,
     });
-    res.send(true);
 
     // // 4. refreshToken(=JWT)을 만들어서 프론트엔드(쿠키)에 보내주기
     // await this.authService.setRefreshToken({
@@ -69,8 +68,10 @@ export class AuthController {
     // });
 
     // 5. 일치하는 유저가 있으면?! accessToken(=JWT)을 만들어서 브라우저에 전달하기
-    // const accessToken = this.authService.getAccessToken({ user: user });
-    // console.log(accessToken, '1-1-1-1-1-1-1-1');
+    const accessToken = this.authService.getAccessToken({ user: user });
+    console.log(accessToken, '1-1-1-1-1-1-1-1');
+    res.send(true);
+
     // res.send(accessToken);
   }
 

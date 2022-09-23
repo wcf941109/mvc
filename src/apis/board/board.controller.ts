@@ -9,7 +9,9 @@ import {
   Render,
   Req,
 } from '@nestjs/common';
+import { Request } from 'express';
 import { BoardService } from './board.service';
+import * as jwt from 'jsonwebtoken';
 
 @Controller()
 export class BoardController {
@@ -19,9 +21,24 @@ export class BoardController {
 
   @Get('/board')
   @Render('board')
-  async board() {
+  async board(
+    @Req() req: Request, //
+  ) {
     const result = await this.boardService.find();
-    return { data: result };
+    let accessToken = '';
+    if (req.headers.cookie) {
+      accessToken = req.headers.cookie.split('refreshToken=')[1];
+    } else {
+      return { nickname: '', data: result };
+    }
+    if (accessToken === '') {
+      return { nickname: '', data: result };
+    } else if (accessToken !== undefined) {
+      const checkToken = jwt.verify(accessToken, process.env.REFRESH_TOKEN_KEY);
+      return { nickname: checkToken['nickname'], data: result };
+    } else {
+      return { nickname: '', data: result };
+    }
   }
 
   @Post('/board')
@@ -40,7 +57,26 @@ export class BoardController {
 
   @Get('/write')
   @Render('write')
-  write() {}
+  async write(
+    @Param('id') id: string,
+    @Req() req: Request, //
+  ) {
+    const result = await this.boardService.findOne(id);
+    let accessToken = '';
+    if (req.headers.cookie) {
+      accessToken = req.headers.cookie.split('refreshToken=')[1];
+    } else {
+      return { nickname: '', data: result };
+    }
+    if (accessToken === '') {
+      return { nickname: '', data: result };
+    } else if (accessToken !== undefined) {
+      const checkToken = jwt.verify(accessToken, process.env.REFRESH_TOKEN_KEY);
+      return { nickname: checkToken['nickname'], data: result };
+    } else {
+      return { nickname: '', data: result };
+    }
+  }
 
   @Get('/findid')
   @Render('findid')
@@ -52,8 +88,24 @@ export class BoardController {
 
   @Get('/board_detail/update/:id')
   @Render('update')
-  async detail(@Param('id') id: string) {
+  async detail(
+    @Param('id') id: string,
+    @Req() req: Request, //
+  ) {
     const result = await this.boardService.findOne(id);
-    return { data: result };
+    let accessToken = '';
+    if (req.headers.cookie) {
+      accessToken = req.headers.cookie.split('refreshToken=')[1];
+    } else {
+      return { nickname: '', data: result };
+    }
+    if (accessToken === '') {
+      return { nickname: '', data: result };
+    } else if (accessToken !== undefined) {
+      const checkToken = jwt.verify(accessToken, process.env.REFRESH_TOKEN_KEY);
+      return { nickname: checkToken['nickname'], data: result };
+    } else {
+      return { nickname: '', data: result };
+    }
   }
 }

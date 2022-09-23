@@ -16,3 +16,12 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
 }
+
+.loginId {
+  display: flex;
+  align-items: center;
+}
+
+.loginId span {
+  padding-left: 10px;
+}

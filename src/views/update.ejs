@@ -19,22 +19,38 @@
     />
     <!-- axios 사용 -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script
+    src="https://kit.fontawesome.com/8ddf9e168a.js"
+    crossorigin="anonymous"
+  ></script>
+
     
     
     <title>Update</title>
   </head>
   <body>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>    
     <header id="header">
       <div class="desktopHeader">
         <div class="logo">
-          <a href="/">Shooting_BasketBall</a>
+          <a href="/home">Shooting_BasketBall</a>
         </div>
         <nav>
             <li><a href="/introduce">소개</a></li>
             <li><a href="/board">자유게시판</a></li>
           <li><a href="/shooting">슈팅 관련</a></li>
-          <li> <a class="loginText" href="/login">로그인</a></li>
-        </nav>
+          <li>  <div class="loginId">
+            <% if(data.name){%>
+            <div><%=data.name%>님 환영합니다</div>
+            <span
+              ><a href="/logout"
+                ><i class="fa-solid fa-right-from-bracket"></i></a
+            ></span>
+            <% } else {%>
+            <div class="navi"><a href="/login">로그인</a></div>
+            <%}%>
+          </div></li>        </nav>
+      </div>
       </div>
       </div>
     </header>
@@ -55,7 +71,7 @@
         </div>
         <div class="write">
           <label for="name">작성자</label>
-          <input id="name" value="<%=data.name%>" type="text" />
+          <input id="name" readonly class="title2" value="<%=data.name%>" type="text" />
         </div>
 
         <div class="write">
