@@ -21,17 +21,18 @@ export class AuthService {
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
+
     private readonly jwtService: JwtService, //
+
     @Inject(CACHE_MANAGER)
     private readonly cacheMananger: Cache,
+
     private readonly userService: UserService,
   ) {}
-
-  setRefreshToken({ user, res, req }) {
+  //
+  token({ user, res, req }) {
     const refreshToken = this.jwtService.sign(
-      {
-        nickname: user.nickname,
-      },
+      { nickname: user.nickname },
       { secret: process.env.REFRESH_TOKEN_KEY, expiresIn: '24h' },
     );
     console.log(refreshToken, '리프레쉬토큰1');
@@ -40,26 +41,7 @@ export class AuthService {
     if (whiteList.includes(origin)) {
       res.setHeader('Access-Control-Allow-Origin', origin);
     }
-    res.cookie('refreshToken', refreshToken); // res.setHeader('Access-Control-Allow-Credentials', 'true');
-    // res.setHeader('Access-Control-Allow-Methods', 'POST, GET, FETCH');
-    // res.setHeader(
-    //   'Set-Cookie',
-    //   `refreshToken=${refreshToken}`,
-    // path=/; domain=localhost:3000; SameSite=None; Secure; httpOnly;,
-    // );
-  }
-  validationToken({ accessToken, refreshToken }) {
-    try {
-      jwt.verify(accessToken, process.env.ACCESS_TOKEN_KEY);
-      jwt.verify(refreshToken, process.env.REFRESH_TOKEN_KEY);
-
-      return true;
-    } catch (error) {
-      throw new UnauthorizedException(
-        '유효하지 않은 소셜 엑세스 토큰입니다',
-        error,
-      );
-    }
+    res.cookie('refreshToken', refreshToken);
   }
 
   getAccessToken({ user }) {
@@ -85,41 +67,20 @@ export class AuthService {
       });
     }
 
-    this.setRefreshToken({ user, res, req });
+    this.token({ user, res, req });
     res.redirect('http://localhost:3000');
     return user;
   }
 
-  async saveToken({ accessToken, refreshToken }) {
-    const verifyAccess: any = jwt.verify(
-      accessToken,
-      process.env.ACCESS_TOKEN_KEY,
-    );
-    const verifyRefresh: any = jwt.verify(
-      refreshToken,
-      process.env.REFRESH_TOKEN_KEY,
-    );
-
+  async logout({ req, res }) {
+    const token = req.headers.cookie.replace('refreshToken=', '');
     try {
-      // 토큰 저장
-      const saveAccess = await this.cacheMananger.set(
-        `accessToken:${accessToken}`,
-        'accessToken',
-        {
-          ttl: verifyAccess.exp - verifyAccess.iat,
-        },
-      );
-      const saveRefresh = await this.cacheMananger.set(
-        `refreshToken:${refreshToken}`,
-        'refreshToken',
-        {
-          ttl: verifyRefresh.exp - verifyRefresh.iat,
-        },
-      );
-
-      if (saveAccess === 'OK' && saveRefresh === 'OK') return true;
-    } catch (error) {
-      throw new ConflictException('토큰을 저장하지 못했습니다!!', error);
+      jwt.verify(token, 'myRefreshkey');
+      res.cookie('refreshToken', '');
+      res.redirect('http://localhost:3000/login');
+      return '로그아웃 성공';
+    } catch {
+      throw new UnauthorizedException();
     }
   }
 }

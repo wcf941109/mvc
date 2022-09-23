@@ -17,6 +17,10 @@
 
     <!-- axios 사용 -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script
+      src="https://kit.fontawesome.com/8ddf9e168a.js"
+      crossorigin="anonymous"
+    ></script>
 
     <title>Shooting_BasketBall</title>
   </head>
@@ -33,6 +37,10 @@
           <li>  <div class="loginId">
             <% if(nickname){%>
             <div><%=nickname%>님 환영합니다</div>
+            <span
+              ><a href="/logout"
+                ><i class="fa-solid fa-right-from-bracket"></i></a
+            ></span>
             <% } else {%>
             <div class="navi"><a href="/login">로그인</a></div>
             <%}%>

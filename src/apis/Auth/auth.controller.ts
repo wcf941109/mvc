@@ -27,7 +27,7 @@ import { AuthGuard } from '@nestjs/passport';
 export class AuthController {
   constructor(
     private readonly authService: AuthService, //
-    private readonly userService: UserService,
+    private readonly userService: UserService, //
     @Inject(CACHE_MANAGER)
     private readonly cacheManager: Cache,
   ) {}
@@ -52,18 +52,14 @@ export class AuthController {
 
     console.log(isAuth, '333333333333333');
 
-    // if (pwd === user.pwd) {
-    //   return '맞음';
-    // }
-    // return '틀림';
-
     if (!isAuth)
       throw new UnprocessableEntityException('비밀번호가 일치하지 않습니다.');
-    await this.authService.setRefreshToken({
+    await this.authService.token({
       user,
       res,
       req,
     });
+    res.send(true);
 
     // // 4. refreshToken(=JWT)을 만들어서 프론트엔드(쿠키)에 보내주기
     // await this.authService.setRefreshToken({
@@ -73,9 +69,9 @@ export class AuthController {
     // });
 
     // 5. 일치하는 유저가 있으면?! accessToken(=JWT)을 만들어서 브라우저에 전달하기
-    const accessToken = this.authService.getAccessToken({ user: user });
-    console.log(accessToken, '1-1-1-1-1-1-1-1');
-    res.send(accessToken);
+    // const accessToken = this.authService.getAccessToken({ user: user });
+    // console.log(accessToken, '1-1-1-1-1-1-1-1');
+    // res.send(accessToken);
   }
 
   @Get('/login/google')
@@ -104,36 +100,9 @@ export class AuthController {
   ) {
     await this.authService.getUserInfo(req, res);
   }
-  @Get('')
-  async logout(
-    @Req() req: Request, //
-    @Res() res: Response,
-  ) {
-    const headersAuthoriztion = req.headers.authorization;
-
-    const headersCookie = req.headers.cookie;
-
-    if (!headersAuthoriztion)
-      throw new UnprocessableEntityException('소셜 엑세스 토큰이 없습니다!!');
-    if (!headersCookie)
-      throw new UnprocessableEntityException('소셜 리프레쉬 토큰이 없습니다!!');
-
-    const accessToken = req.headers.authorization.replace('Bearer ', '');
-    const refreshToken = req.headers.cookie.replace('refreshToken=', '');
-
-    const isValidation = this.authService.validationToken({
-      accessToken,
-      refreshToken,
-    });
-
-    if (isValidation) {
-      const isSave = this.authService.saveToken({ accessToken, refreshToken });
-
-      if (isSave) {
-        return '로그아웃에 성공했습니다.';
-      }
-    }
-
-    return '로그아웃 실패!!';
+  @Get('/')
+  async logout(@Req() req: Request, @Res() res: Response) {
+    const result = await this.authService.logout({ req, res });
+    console.log(result);
   }
 }

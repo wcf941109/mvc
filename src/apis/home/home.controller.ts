@@ -21,15 +21,15 @@ export class HomeController {
     @Req() req: Request, //
   ) {
     let accessToken = '';
-    console.log(req, '쿠키-------------');
     if (req.headers.cookie) {
       accessToken = req.headers.cookie.split('refreshToken=')[1];
     } else {
       return { nickname: '' };
     }
-
-    if (accessToken !== undefined) {
-      const checkToken = jwt.verify(accessToken, 'myRefreshKey');
+    if (accessToken === '') {
+      return { nickname: '' };
+    } else if (accessToken !== undefined) {
+      const checkToken = jwt.verify(accessToken, 'myRefreshkey');
       return { nickname: checkToken['nickname'] };
     } else {
       return { nickname: '' };

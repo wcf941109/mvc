@@ -7,9 +7,8 @@ import { HomeModule } from './apis/home/home.module';
 import { IntroduceModule } from './apis/introduce/introduce.module';
 import { ShootingModule } from './apis/shooting/shooting.module';
 import { UpdateModule } from './apis/update/update.module';
-import { User } from './apis/user/entities/user.entity';
 import { UserModule } from './apis/user/user.module';
-import * as redisStore from 'cache-manager';
+import * as redisStore from 'cache-manager-redis-store';
 import { RedisClientOptions } from 'redis';
 
 @Module({
@@ -24,18 +23,18 @@ import { RedisClientOptions } from 'redis';
     ShootingModule,
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'localhost',
+      host: 'my_database',
       port: 3306,
       username: 'root',
-      password: 'root',
-      database: 'mvc',
+      password: '12341234',
+      database: 'mvc01',
       entities: [__dirname + '/apis/**/*.entity.*'],
       synchronize: true,
       logging: true,
     }),
     CacheModule.register<RedisClientOptions>({
       store: redisStore,
-      url: 'redis://localhost:3000',
+      url: 'redis://my-redis:6379',
       isGlobal: true,
     }),
   ],

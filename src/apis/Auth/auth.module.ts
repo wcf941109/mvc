@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { CacheModule, Module } from '@nestjs/common';
 import { JwtModule, JwtService } from '@nestjs/jwt';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { JwtRefreshStrategy } from 'src/public/auth/jwt-refresh.strategy';
@@ -15,6 +15,7 @@ dotenv.config();
 
 @Module({
   imports: [
+    CacheModule.register(),
     JwtModule.register({
       secret: process.env.REFRESH_TOKEN_KEY,
     }), //
