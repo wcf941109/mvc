@@ -37,16 +37,18 @@ document.getElementById('loginBtn').addEventListener('click', () => {
   } else if (getPwd == '') {
     alert('비밀번호를 입력해주세요.');
   }
-  try {
-    axios.post('/login', {
-      headers: {
-        'Content-Type': 'application/json',
-      },
+
+  axios
+    .post('/login', {
       name: getname,
       pwd: getPwd,
+    })
+    .then(function (response) {
+      window.location = '/home';
+    })
+    .catch(function (error) {
+      if (error.response.data) {
+        alert(error.response.data.message);
+      }
     });
-    window.location = '/home';
-  } catch (error) {
-    console.log(error.message);
-  }
 });
