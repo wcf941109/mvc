@@ -15,7 +15,7 @@ export class ShootingController {
     const result = await this.shootingService.find();
     let accessToken = '';
     if (req.headers.cookie) {
-      accessToken = req.headers.cookie.split('refreshToken=')[1];
+      accessToken = req.headers.cookie.split('Token=')[1];
     } else {
       return { name: '', data: result };
     }

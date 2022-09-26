@@ -1,12 +1,12 @@
 import { CACHE_MANAGER, Inject, UnauthorizedException } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
-import { Strategy } from 'passport-jwt';
+import { Strategy } from 'passport';
 import { Cache } from 'cache-manager';
 import * as dotenv from 'dotenv';
 
 dotenv.config();
 
-export class JwtRefreshStrategy extends PassportStrategy(Strategy, 'refresh') {
+export class JwtTokenStrategy extends PassportStrategy(Strategy, 'Token') {
   constructor(
     @Inject(CACHE_MANAGER)
     private readonly cacheManager: Cache, //
@@ -15,8 +15,8 @@ export class JwtRefreshStrategy extends PassportStrategy(Strategy, 'refresh') {
       jwtFromRequest: (req) => {
         try {
           const cookie = req.headers.cookie;
-          const refreshToken = cookie.replace('refreshToken=', '');
-          return refreshToken;
+          const Token = cookie.replace('refreshToken=', '');
+          return Token;
         } catch (error) {
           console.log(error);
         }
@@ -27,13 +27,10 @@ export class JwtRefreshStrategy extends PassportStrategy(Strategy, 'refresh') {
   }
 
   async validate(req, payload) {
-    const refreshToken = req.headers.cookie.split('=')[1];
+    const Token = req.headers.cookie.split('=')[1];
 
-    const hasRefreshToken = await this.cacheManager.get(
-      `refreshToken:${refreshToken}`,
-    );
-    if (hasRefreshToken)
-      throw new UnauthorizedException('로그인 후 사용해주세요!');
+    const hasToken = await this.cacheManager.get(`Token:${Token}`);
+    if (hasToken) throw new UnauthorizedException('로그인 후 사용해주세요!');
 
     return {
       name: payload.name,

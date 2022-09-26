@@ -31,17 +31,17 @@ export class AuthService {
   ) {}
   //
   token({ user, res, req }) {
-    const refreshToken = this.jwtService.sign(
+    const Token = this.jwtService.sign(
       { name: user.name },
       { secret: process.env.REFRESH_TOKEN_KEY, expiresIn: '24h' },
     );
-    console.log(refreshToken, '리프레쉬토큰1');
+    console.log(Token, '리프레쉬토큰1');
     const whiteList = ['http://localhost:3000/'];
     const origin = req.headers.origin;
     if (whiteList.includes(origin)) {
       res.setHeader('Access-Control-Allow-Origin', origin);
     }
-    res.cookie('refreshToken', refreshToken);
+    res.cookie('Token', Token);
   }
 
   getAccessToken({ user }) {
@@ -76,7 +76,7 @@ export class AuthService {
     const token = req.headers.cookie.replace('refreshToken=', '');
     try {
       jwt.verify(token, process.env.REFRESH_TOKEN_KEY);
-      res.cookie('refreshToken', '');
+      res.cookie('token', '');
       res.redirect('http://localhost:3000/home');
       return '로그아웃 성공';
     } catch {

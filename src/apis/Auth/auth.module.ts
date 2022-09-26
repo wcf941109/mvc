@@ -1,7 +1,6 @@
 import { CacheModule, Module } from '@nestjs/common';
 import { JwtModule, JwtService } from '@nestjs/jwt';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { JwtRefreshStrategy } from 'src/public/auth/jwt-refresh.strategy';
 import { User } from '../user/entities/user.entity';
 import { UserService } from '../user/user.service';
 import { AuthController } from './auth.controller';
@@ -10,6 +9,7 @@ import * as dotenv from 'dotenv';
 import { JwtGoogleStrategy } from 'src/public/auth/jwt-social-google.strategy';
 import { JwtNaverStrategy } from 'src/public/auth/jwt-social-naver.strategy';
 import { JwtKaKaoStrategy } from 'src/public/auth/jwt-social-kakao.strategy';
+import { JwtTokenStrategy } from 'src/public/auth/jwt.strategy';
 
 dotenv.config();
 
@@ -25,7 +25,7 @@ dotenv.config();
     AuthService, //
     UserService,
     JwtService,
-    JwtRefreshStrategy,
+    JwtTokenStrategy,
     JwtGoogleStrategy,
     JwtKaKaoStrategy,
     JwtNaverStrategy,

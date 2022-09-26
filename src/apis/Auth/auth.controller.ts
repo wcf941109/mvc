@@ -61,8 +61,8 @@ export class AuthController {
       req,
     });
 
-    // // 4. refreshToken(=JWT)을 만들어서 프론트엔드(쿠키)에 보내주기
-    // await this.authService.setRefreshToken({
+    // // 4. Token(=JWT)을 만들어서 프론트엔드(쿠키)에 보내주기
+    // await this.authService.setToken({
     //   user,
     //   res,
     //   req,
