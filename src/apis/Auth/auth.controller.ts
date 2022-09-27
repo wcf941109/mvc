@@ -61,8 +61,8 @@ export class AuthController {
       req,
     });
 
-    // // 4. Token(=JWT)을 만들어서 프론트엔드(쿠키)에 보내주기
-    // await this.authService.setToken({
+    // // 4. refreshToken(=JWT)을 만들어서 프론트엔드(쿠키)에 보내주기
+    // await this.authService.setrefreshToken({
     //   user,
     //   res,
     //   req,
@@ -104,8 +104,10 @@ export class AuthController {
   }
   @Get('/logout')
   @Render('logout')
-  async logout(@Req() req: Request, @Res() res: Response) {
-    const result = await this.authService.logout({ req, res });
-    console.log(result);
+  async logout(
+    @Req() req: Request, //
+    @Res() res: Response,
+  ) {
+    await this.authService.logout({ req, res });
   }
 }

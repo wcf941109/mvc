@@ -41,7 +41,8 @@ export class AuthService {
     if (whiteList.includes(origin)) {
       res.setHeader('Access-Control-Allow-Origin', origin);
     }
-    res.cookie('Token', Token);
+    console.log(req.headers, '쿠키');
+    res.cookie('refreshToken', Token);
   }
 
   getAccessToken({ user }) {
@@ -73,11 +74,14 @@ export class AuthService {
   }
 
   async logout({ req, res }) {
-    const token = req.headers.cookie.replace('refreshToken=', '');
     try {
-      jwt.verify(token, process.env.REFRESH_TOKEN_KEY);
-      res.cookie('token', '');
-      res.redirect('http://localhost:3000/home');
+      const token = await req.headers.cookie.replace('refreshToken=', '');
+      const aaa = jwt.verify(token, process.env.REFRESH_TOKEN_KEY);
+      console.log(aaa, '확인');
+
+      // res 합쳐야함
+      res.cookie('refreshToken', '').redirect('http://localhost:3000/home');
+      // res.redirect('http://localhost:3000/home');
       return '로그아웃 성공';
     } catch {
       throw new UnauthorizedException();

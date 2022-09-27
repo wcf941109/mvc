@@ -6,7 +6,7 @@ import * as dotenv from 'dotenv';
 
 dotenv.config();
 
-export class JwtTokenStrategy extends PassportStrategy(Strategy, 'Token') {
+export class JwtTokenStrategy extends PassportStrategy(Strategy, 'refresh') {
   constructor(
     @Inject(CACHE_MANAGER)
     private readonly cacheManager: Cache, //
@@ -29,7 +29,7 @@ export class JwtTokenStrategy extends PassportStrategy(Strategy, 'Token') {
   async validate(req, payload) {
     const Token = req.headers.cookie.split('=')[1];
 
-    const hasToken = await this.cacheManager.get(`Token:${Token}`);
+    const hasToken = await this.cacheManager.get(`refreshToken:${Token}`);
     if (hasToken) throw new UnauthorizedException('로그인 후 사용해주세요!');
 
     return {

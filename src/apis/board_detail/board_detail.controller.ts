@@ -27,7 +27,7 @@ export class BoardDetailController {
     const result = await this.boarddetailService.findOne(id);
     let accessToken = '';
     if (req.headers.cookie) {
-      accessToken = req.headers.cookie.split('Token=')[1];
+      accessToken = req.headers.cookie.split('refreshToken=')[1];
     } else {
       return { name: '', data: result };
     }
@@ -43,9 +43,9 @@ export class BoardDetailController {
 
   @Delete('/')
   async deleteBoard(@Body() data) {
-    console.log(data, '1111111111');
+    // console.log(data, '1111111111');
     const result = await this.boarddetailService.delete(data);
-    console.log(result, '22222222222');
+    // console.log(result, '22222222222');
     return result;
   }
 }

@@ -28,6 +28,21 @@ function add() {
 //   });
 // });
 
+// 따로 js파일 만들어야 함.
+// document.getElementById('getWrite').addEventListener('click', () => {
+//   axios
+//     .post('/write', {})
+//     .then(function (response) {
+//       window.location = '/write';
+//     })
+//     .catch(function (error) {
+//       if (error) {
+//         alert(error.response.data.message);
+//         window.location = '/login';
+//       }
+//     });
+// });
+
 document.getElementById('loginBtn').addEventListener('click', () => {
   const getname = document.getElementById('name').value;
   const getPwd = document.getElementById('pwd').value;

@@ -8,6 +8,7 @@ import {
   Put,
   Render,
   Req,
+  UnprocessableEntityException,
 } from '@nestjs/common';
 import { Request } from 'express';
 import { BoardService } from './board.service';
@@ -27,7 +28,7 @@ export class BoardController {
     const result = await this.boardService.find();
     let accessToken = '';
     if (req.headers.cookie) {
-      accessToken = req.headers.cookie.split('Token=')[1];
+      accessToken = req.headers.cookie.split('refreshToken=')[1];
     } else {
       return { name: '', data: result };
     }
@@ -55,26 +56,66 @@ export class BoardController {
   @Render('login')
   login() {}
 
+  // @Get('/write')
+  // @Render('write')
+  // async write(
+  //   @Param('id') id: string,
+  //   @Req() req: Request, //
+  // ) {
+  //   const result = await this.boardService.findOne(id);
+  //   let accessToken = '';
+  //   if (req.headers.cookie) {
+  //     accessToken = req.headers.cookie.split('refreshToken=')[1];
+  //   } else {
+  //     return { name: '', data: result };
+  //   }
+  //   if (accessToken === '') {
+  //     return { name: '', data: result };
+  //   } else if (accessToken !== undefined) {
+  //     const checkToken = jwt.verify(accessToken, process.env.REFRESH_TOKEN_KEY);
+  //     return { name: checkToken['name'], data: result };
+  //   } else {
+  //     return { name: '', data: result };
+  //   }
+  // }
+
   @Get('/write')
   @Render('write')
-  async write(
-    @Param('id') id: string,
+  write(
     @Req() req: Request, //
   ) {
-    const result = await this.boardService.findOne(id);
-    let accessToken = '';
-    if (req.headers.cookie) {
-      accessToken = req.headers.cookie.split('Token=')[1];
+    // console.log(req.headers.cookie, '111111111111111');
+    if (
+      req.headers.cookie === undefined ||
+      req.headers.cookie === 'refreshToken='
+    ) {
+      req.res.redirect('/login');
     } else {
-      return { name: '', data: result };
+      const checkToken = jwt.verify(
+        req.headers.cookie.split('refreshToken=')[1],
+        process.env.REFRESH_TOKEN_KEY,
+      );
+      return { name: checkToken['name'] };
     }
-    if (accessToken === '') {
-      return { name: '', data: result };
-    } else if (accessToken !== undefined) {
-      const checkToken = jwt.verify(accessToken, process.env.REFRESH_TOKEN_KEY);
-      return { name: checkToken['name'], data: result };
+  }
+
+  @Post('/write')
+  async loginUser(
+    // @Body() data, //
+    @Req() req: Request,
+  ) {
+    if (
+      req.headers.cookie === undefined ||
+      req.headers.cookie === 'refreshToken='
+    ) {
+      throw new UnprocessableEntityException('로그인 후 이용가능 합니다.');
+      // req.res.redirect('/login');
     } else {
-      return { name: '', data: result };
+      const checkToken = jwt.verify(
+        req.headers.cookie.split('refreshToken=')[1],
+        process.env.KEY,
+      );
+      return { name: checkToken['name'] };
     }
   }
 
@@ -95,7 +136,7 @@ export class BoardController {
     const result = await this.boardService.findOne(id);
     let accessToken = '';
     if (req.headers.cookie) {
-      accessToken = req.headers.cookie.split('Token=')[1];
+      accessToken = req.headers.cookie.split('refreshToken=')[1];
     } else {
       return { name: '', data: result };
     }
