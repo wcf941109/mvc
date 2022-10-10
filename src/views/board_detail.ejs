@@ -16,8 +16,8 @@
         <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Palette+Mosaic&display=swap" rel="stylesheet">
     
         <!-- axios 사용 -->
-        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-        <script
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+                <script
         src="https://kit.fontawesome.com/8ddf9e168a.js"
         crossorigin="anonymous"
       ></script>
@@ -29,15 +29,15 @@
     <header id="header">
       <div class="desktopHeader">
         <div class="logo">
-          <a href="/home">Shooting_BasketBall</a>
+          <a href="/">Shooting_BasketBall</a>
         </div>
         <nav>
             <li><a href="/introduce">소개</a></li>
             <li><a href="/board">자유게시판</a></li>
           <li><a href="/shooting">슈팅 관련</a></li>
-          <li>  <div class="loginId">
+          <li>  <div class="loginId" >
             <% if(name){%>
-            <div><%=name%>님 환영합니다</div>
+            <div><span id="name1"><%=name%></span>님 환영합니다</div>
             <span
               ><a href="/logout"
                 ><i class="fa-solid fa-right-from-bracket"></i></a
@@ -81,7 +81,7 @@
             <td id="id" value="<%=data.id%>" type="text"><%=data.id%></td>
             <td>작성자</td>
 
-            <td id="name" value="<%=data.name%>" type="text"><%=data.name%></td>
+            <td id="name2" value="<%=data.name%>" type="text"><%=data.name%></td>
             <td>작성일자</td>
             <td id="createdAt" value="<%=data.createdAt%>" type="text"><%=data.createdAt%></td>
 
@@ -95,7 +95,7 @@
     <div class="listBtn">
       <button type="button"id="getList">목록</button>
       <tr>
-        <button type="button"><a href="update/<%=data.id%>">수정</a></button>
+        <button type="button" id="updateBoard">수정</button>
       </tr>
 
       <button type="button" id="deleteBoard">삭제</button>
@@ -106,7 +106,6 @@
       <div class="footerText">문의 : wcf941109@gmail.com</div>       
   </footer>
    <!-- 자바 스크립트 연결 -->
-   <script type="text/javascript" src="/js/board.js"></script>
    <script type="text/javascript" src="/js/board_detail.js"></script>
 
 </body>

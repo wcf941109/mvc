@@ -10,6 +10,8 @@ import { UpdateModule } from './apis/update/update.module';
 import { UserModule } from './apis/user/user.module';
 import * as redisStore from 'cache-manager-redis-store';
 import { RedisClientOptions } from 'redis';
+import { AppService } from './app.service';
+import { AppController } from './app.controller';
 
 @Module({
   imports: [
@@ -23,12 +25,12 @@ import { RedisClientOptions } from 'redis';
     ShootingModule,
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: '10.5.17.4',
-      // host: 'localhost',
-
+      host: '10.1.64.2',
+      // host: 'my_database',
       port: 3306,
       username: 'root',
       password: 'root',
+      // password: '12341234', //local
       database: 'mvc01',
       entities: [__dirname + '/apis/**/*.entity.*'],
       synchronize: true,
@@ -36,13 +38,13 @@ import { RedisClientOptions } from 'redis';
     }),
     CacheModule.register<RedisClientOptions>({
       store: redisStore,
-      url: 'redis://10.5.16.3:6379',
+      url: 'redis://10.1.65.3:6379',
       // url: 'redis://my-redis:6379',
 
       isGlobal: true,
     }),
   ],
-  controllers: [],
-  providers: [],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}

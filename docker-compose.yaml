@@ -3,7 +3,7 @@ version: '3.7'
 services:
   mvc01-server:
     platform: linux/x86_64
-    image: asia.gcr.io/mvc01-364005/mvc01:1.14
+    image: asia.gcr.io/fiery-aspect-364704/mvc01:1.6
     build:
       context: .
       dockerfile: Dockerfile
@@ -20,7 +20,8 @@ services:
   #   image: mysql:8.0.29
   #   environment:
   #     MYSQL_DATABASE: 'mvc01'
-  #     MYSQL_ROOT_PASSWORD: root
+  #     MYSQL_ROOT_PASSWORD: 12341234
+
   #     TZ: Asia/Seoul
   #   command:
   #     - --character-set-server=utf8mb4
@@ -31,10 +32,10 @@ services:
   #   ports:
   #     - 3306:3306
 
-  my-redis:
-    image: redis:latest
-    ports:
-      - 6379:6379
+  # my-redis:
+  #   image: redis:latest
+  #   ports:
+  #     - 6379:6379
 
   # logstash:
   #     platform: linux/x86_64

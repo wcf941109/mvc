@@ -80,8 +80,8 @@ export class AuthService {
       console.log(aaa, '확인');
 
       // res 합쳐야함
-      res.cookie('refreshToken', '').redirect('http://localhost:3000/home');
-      // res.redirect('http://localhost:3000/home');
+      res.cookie('refreshToken', '').redirect('http://localhost:3000/');
+      // res.redirect('http://localhost:3000/');
       return '로그아웃 성공';
     } catch {
       throw new UnauthorizedException();

@@ -18,7 +18,7 @@
       rel="stylesheet"
     />
     <!-- axios 사용 -->
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script
     src="https://kit.fontawesome.com/8ddf9e168a.js"
     crossorigin="anonymous"
@@ -33,16 +33,16 @@
     <header id="header">
       <div class="desktopHeader">
         <div class="logo">
-          <a href="/home">Shooting_BasketBall</a>
+          <a href="/">Shooting_BasketBall</a>
         </div>
         <nav>
             <li><a href="/introduce">소개</a></li>
             <li><a href="/board">자유게시판</a></li>
           <li><a href="/shooting">슈팅 관련</a></li>
           <li>  <div class="loginId">
-            <% if(data.name){%>
-            <div><%=data.name%>님 환영합니다</div>
-            <span
+            <% if(name){%>
+              <div><span id="name1"><%=name%></span>님 환영합니다</div>
+              <span
               ><a href="/logout"
                 ><i class="fa-solid fa-right-from-bracket"></i></a
             ></span>
@@ -71,7 +71,7 @@
         </div>
         <div class="write">
           <label for="name">작성자</label>
-          <input id="name" readonly class="title2" value="<%=data.name%>" type="text" />
+          <input id="name2" readonly class="title2" value="<%=data.name%>" type="text" />
         </div>
 
         <div class="write">

@@ -8,7 +8,7 @@ import {
   Req,
   Res,
 } from '@nestjs/common';
-import { Request } from 'express';
+import { Request, Response } from 'express';
 import { BoardDetailService } from './board_detail.service';
 import * as jwt from 'jsonwebtoken';
 

@@ -58,4 +58,18 @@ export class BoardService {
     return result;
     // return result.affected ? true : false;
   }
+
+  async count() {
+    return await this.boardRepository.count();
+  }
+
+  async findPage({ page }) {
+    return await this.boardRepository.find({
+      order: {
+        id: 'DESC',
+      },
+      skip: (Number(page ?? 1) - 1) * 10,
+      take: 10,
+    });
+  }
 }

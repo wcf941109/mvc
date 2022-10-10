@@ -19,7 +19,7 @@ export class UpdateService {
     });
   }
 
-  async update({ req, UpdateBoardInput }) {
+  async update({ req, updateBoardInput }) {
     const findUpdate = await this.updateRepository.findOne({
       where: { title: req.body.title },
     });
@@ -28,7 +28,7 @@ export class UpdateService {
         id: findUpdate.id,
       },
       {
-        ...UpdateBoardInput,
+        ...updateBoardInput,
       },
     );
     return result;

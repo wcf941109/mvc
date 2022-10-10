@@ -7,15 +7,7 @@ import { Request } from 'express';
 export class HomeController {
   constructor(private readonly homeService: HomeService) {}
 
-  // @Get('/')
-  // @Render('home')
-  // async home() {
-  //   const result = await this.homeService.find();
-  //   console.log(result);
-  //   return { data: result };
-  // }
-
-  @Get('/home')
+  @Get('/')
   @Render('home')
   async home(
     @Req() req: Request, //

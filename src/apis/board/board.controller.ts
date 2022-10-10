@@ -133,6 +133,7 @@ export class BoardController {
     @Param('id') id: string,
     @Req() req: Request, //
   ) {
+    console.log(req, '---------');
     const result = await this.boardService.findOne(id);
     let accessToken = '';
     if (req.headers.cookie) {
