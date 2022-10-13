@@ -85,6 +85,63 @@
           </div>
       </article>
   </section>
+  <div class="page_wrap">
+    <div class="paging">
+      <div class="ctrlBack">
+        <a href="/board?id=1" id="leftStart" class="leftStart">
+          <i class="arrow fa-solid fa-angles-left"></i>
+        </a>
+        <% if( Number(currentPage) <= 1) { %>
+        <a href="/board?id=<%= 1 %>" id="left" class="right">
+          <i class="arrow fa-solid fa-angle-left"></i>
+        </a>
+        <% } else { %>
+        <a
+          href="/board?id=<%=  Number(currentPage) - 1 %>"
+          id="left"
+          class="right"
+        >
+          <i class="arrow fa-solid fa-angle-left"></i>
+        </a>
+        <% } %>
+
+        <div class="pageNum" id="pageNum">
+          <% if(pageCount >= 5 ) { %> <% for ( let i = 0 ; i < 5 ; i++) { %>
+          <a
+            class="pageBtn <%= Number(currentPage) === i + 1 ? 'active':'' %>"
+            href="/board?id=<%= i+1 %>"
+            ><%= i + 1 %></a
+          >
+          <% } %> <% } else { %> <% for ( let i = 0 ; i < pageCount ; i++) {
+          %>
+          <a
+            class="pageBtn <%= Number(currentPage) === i + 1 ? 'active':'' %>"
+            href="/board?id=<%= i+1 %>"
+            ><%= i + 1 %></a
+          >
+          <% } %> <% } %>
+        </div>
+        <% if( Number(currentPage) >= pageCount) { %>
+        <a href="/board?id=<%= pageCount %>" id="right" class="right">
+          <i class="arrow fa-solid fa-angle-right"></i>
+        </a>
+        <% } else { %>
+        <a
+          href="/board?id=<%= Number(currentPage) + 1 %>"
+          id="right"
+          class="right"
+        >
+          <i class="arrow fa-solid fa-angle-right"></i>
+        </a>
+        <% } %>
+
+        <a href="/board?id=<%= pageCount %>" id="rightEnd" class="rightEnd">
+          <i class="arrow fa-solid fa-angles-right"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
   <footer id="footer">    
       <div class="footerText">문의 : wcf941109@gmail.com</div>       
   </footer>

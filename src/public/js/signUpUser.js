@@ -30,3 +30,21 @@ document.getElementById('getLogin').addEventListener('click', () => {
     window.location = '/login';
   });
 });
+
+function checkId() {
+  const name = document.getElementById('name').value;
+
+  axios
+    .post('/checkId', {
+      name,
+    })
+    .then((res) => {
+      if (res.data) {
+        alert('사용가능한 아이디입니다.');
+        document.getElementById('signupBtn').style.color = 'black';
+        document.getElementById('signupBtn').removeAttribute('disabled');
+      } else {
+        alert('이미 존재하는 아이디입니다.');
+      }
+    });
+}

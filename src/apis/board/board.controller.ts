@@ -6,6 +6,7 @@ import {
   Param,
   Post,
   Put,
+  Query,
   Render,
   Req,
   UnprocessableEntityException,
@@ -23,23 +24,31 @@ export class BoardController {
   @Get('/board')
   @Render('board')
   async board(
+    @Query() query: string,
     @Req() req: Request, //
   ) {
     const result = await this.boardService.find();
-    let accessToken = '';
+    let accessToken, name;
     if (req.headers.cookie) {
-      accessToken = req.headers.cookie.split('refreshToken=')[1];
+      try {
+        accessToken = req.headers.cookie.split('refreshToken=')[1];
+        name = jwt.verify(accessToken, process.env.REFRESH_TOKEN_KEY)['name'];
+      } catch {
+        name = '';
+      }
     } else {
-      return { name: '', data: result };
+      name = '';
     }
-    if (accessToken === '') {
-      return { name: '', data: result };
-    } else if (accessToken !== undefined) {
-      const checkToken = jwt.verify(accessToken, process.env.REFRESH_TOKEN_KEY);
-      return { name: checkToken['name'], data: result };
-    } else {
-      return { name: '', data: result };
-    }
+
+    const count = await this.boardService.count();
+    const page = await this.boardService.findPage({ page: query['id'] });
+
+    return {
+      pageCount: Math.ceil(count / 10),
+      name,
+      data: page,
+      currentPage: query['id'],
+    };
   }
 
   @Post('/board')
@@ -84,7 +93,6 @@ export class BoardController {
   write(
     @Req() req: Request, //
   ) {
-    // console.log(req.headers.cookie, '111111111111111');
     if (
       req.headers.cookie === undefined ||
       req.headers.cookie === 'refreshToken='
@@ -119,6 +127,9 @@ export class BoardController {
     }
   }
 
+  @Post('board')
+  async post() {}
+
   @Get('/findid')
   @Render('findid')
   async findid() {}
@@ -127,27 +138,27 @@ export class BoardController {
   @Render('findpw')
   async findpw() {}
 
-  @Get('/board_detail/update/:id')
-  @Render('update')
-  async detail(
-    @Param('id') id: string,
-    @Req() req: Request, //
-  ) {
-    console.log(req, '---------');
-    const result = await this.boardService.findOne(id);
-    let accessToken = '';
-    if (req.headers.cookie) {
-      accessToken = req.headers.cookie.split('refreshToken=')[1];
-    } else {
-      return { name: '', data: result };
-    }
-    if (accessToken === '') {
-      return { name: '', data: result };
-    } else if (accessToken !== undefined) {
-      const checkToken = jwt.verify(accessToken, process.env.REFRESH_TOKEN_KEY);
-      return { name: checkToken['name'], data: result };
-    } else {
-      return { name: '', data: result };
-    }
-  }
+  // @Get('/board_detail/update/:id')
+  // @Render('update')
+  // async detail(
+  //   @Param('id') id: string,
+  //   @Req() req: Request, //
+  // ) {
+  //   console.log(req, '---------');
+  //   const result = await this.boardService.findOne(id);
+  //   let accessToken = '';
+  //   if (req.headers.cookie) {
+  //     accessToken = req.headers.cookie.split('refreshToken=')[1];
+  //   } else {
+  //     return { name: '', data: result };
+  //   }
+  //   if (accessToken === '') {
+  //     return { name: '', data: result };
+  //   } else if (accessToken !== undefined) {
+  //     const checkToken = jwt.verify(accessToken, process.env.REFRESH_TOKEN_KEY);
+  //     return { name: checkToken['name'], data: result };
+  //   } else {
+  //     return { name: '', data: result };
+  //   }
+  // }
 }

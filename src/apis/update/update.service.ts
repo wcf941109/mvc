@@ -19,18 +19,34 @@ export class UpdateService {
     });
   }
 
-  async update({ req, updateBoardInput }) {
-    const findUpdate = await this.updateRepository.findOne({
-      where: { title: req.body.title },
-    });
+  //   async update({ req, data }) {
+  //     const findUpdate = await this.updateRepository.findOne({
+  //       where: { title: req.body.title },
+  //     });
+  //     const result = await this.updateRepository.update(
+  //       {
+  //         id: findUpdate.id,
+  //       },
+  //       {
+  //         ...data,
+  //       },
+  //     );
+  //     console.log(result, '2222222222');
+  //     return result;
+  //   }
+  // }
+
+  async update(data) {
     const result = await this.updateRepository.update(
-      {
-        id: findUpdate.id,
-      },
-      {
-        ...updateBoardInput,
-      },
+      { title: data.title },
+      { content: data.content },
     );
+    console.log(result);
     return result;
+    // if (result.affected) {
+    //   return await this.boardRepository.findOne(data.id);
+    // } else {
+    //   throw new ConflictException('업데이트 실패했습니다.');
+    // }
   }
 }

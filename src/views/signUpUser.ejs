@@ -44,6 +44,9 @@
           <label for="1">아이디</label>
           <input type="text" id="name" placeholder="아이디를 입력하세요" />
         </div>
+        <div class ='check mt'>
+        <button type="button" class="mt" onclick="checkId()">중복확인</button>
+      </div>
         <div class="sign">
           <label for="2">이메일</label>
           <input type="text" id="email" placeholder="이메일을 입력하세요" />
@@ -57,7 +60,11 @@
           <input type="text" id="phone" placeholder="휴대전화를 입력하세요" />
         </div>
         <div class="check">
-          <button type="button" onclick="signUp()">회원가입</button>
+          <button type="button" onclick="signUp()"
+          disabled
+          style="color:#dfdfdf"
+          id="signupBtn"
+        >회원가입</button>
           <button type="button" id="getLogin">취소</button>
         </div>
       </div>

@@ -38,20 +38,6 @@ export class BoardService {
     });
   }
 
-  async update(data) {
-    const result = await this.boardRepository.update(
-      { title: data.title },
-      { content: data.content },
-    );
-    console.log(result);
-    return result;
-    // if (result.affected) {
-    //   return await this.boardRepository.findOne(data.id);
-    // } else {
-    //   throw new ConflictException('업데이트 실패했습니다.');
-    // }
-  }
-
   async delete({ id }) {
     const result = await this.boardRepository.softDelete({ id });
     console.log('dsdasdasdads');
@@ -66,7 +52,7 @@ export class BoardService {
   async findPage({ page }) {
     return await this.boardRepository.find({
       order: {
-        id: 'DESC',
+        id: 'desc',
       },
       skip: (Number(page ?? 1) - 1) * 10,
       take: 10,

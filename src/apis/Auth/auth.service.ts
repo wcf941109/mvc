@@ -35,13 +35,11 @@ export class AuthService {
       { name: user.name },
       { secret: process.env.REFRESH_TOKEN_KEY, expiresIn: '24h' },
     );
-    console.log(Token, '리프레쉬토큰1');
     const whiteList = ['http://localhost:3000/'];
     const origin = req.headers.origin;
     if (whiteList.includes(origin)) {
       res.setHeader('Access-Control-Allow-Origin', origin);
     }
-    console.log(req.headers, '쿠키');
     res.cookie('refreshToken', Token);
   }
 
@@ -77,7 +75,6 @@ export class AuthService {
     try {
       const token = await req.headers.cookie.replace('refreshToken=', '');
       const aaa = jwt.verify(token, process.env.REFRESH_TOKEN_KEY);
-      console.log(aaa, '확인');
 
       // res 합쳐야함
       res.cookie('refreshToken', '').redirect('http://localhost:3000/');

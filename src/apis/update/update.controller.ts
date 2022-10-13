@@ -13,7 +13,7 @@ import { UpdateBoardInput } from '../\bboard/dto/updateBoard.input';
 import { UpdateService } from './update.service';
 import * as jwt from 'jsonwebtoken';
 
-@Controller('/board_detail/update')
+@Controller('update')
 export class UpdateController {
   constructor(
     private readonly updateService: UpdateService, //
@@ -29,7 +29,6 @@ export class UpdateController {
     @Param('id') id: string, //
     @Req() req: Request, //
   ) {
-    console.log(req, '----------');
     const result = await this.updateService.findOne(id);
     let accessToken = '';
     if (req.headers.cookie) {
@@ -46,12 +45,11 @@ export class UpdateController {
       return { id, name: '', data: result };
     }
   }
-
-  @Put('/:id')
+  @Put('/')
   async update(
-    @Body() updateBoardInput: UpdateBoardInput, //
-    @Req() req: Request,
+    @Body() data, //
   ) {
-    return await this.updateService.update({ req, updateBoardInput });
+    console.log(data);
+    return await this.updateService.update(data);
   }
 }

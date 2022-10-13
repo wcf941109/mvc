@@ -40,7 +40,6 @@ export class AuthController {
     @Res() res: Response,
   ) {
     // 1. 로그인 @@
-    console.log(data, '인풋데이터');
     const name = data.name;
     const pwd = data.pwd;
 
@@ -50,8 +49,6 @@ export class AuthController {
     }
 
     const isAuth = await bcrypt.compare(pwd, user.pwd);
-
-    console.log(isAuth, '333333333333333');
 
     if (!isAuth)
       throw new UnprocessableEntityException('비밀번호가 일치하지 않습니다.');
@@ -70,7 +67,6 @@ export class AuthController {
 
     // 5. 일치하는 유저가 있으면?! accessToken(=JWT)을 만들어서 브라우저에 전달하기
     const accessToken = this.authService.getAccessToken({ user: user });
-    console.log(accessToken, '1-1-1-1-1-1-1-1');
     res.send(true);
 
     // res.send(accessToken);
@@ -109,5 +105,12 @@ export class AuthController {
     @Res() res: Response,
   ) {
     await this.authService.logout({ req, res });
+  }
+
+  @Post('/checkId')
+  async checkId(@Body() data: any) {
+    const user = await this.userService.findOne({ data: data.name });
+
+    return user ? false : true;
   }
 }

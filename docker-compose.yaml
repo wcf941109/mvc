@@ -3,7 +3,7 @@ version: '3.7'
 services:
   mvc01-server:
     platform: linux/x86_64
-    image: asia.gcr.io/fiery-aspect-364704/mvc01:1.6
+    # image: asia.gcr.io/fiery-aspect-364704/mvc01:1.6
     build:
       context: .
       dockerfile: Dockerfile
@@ -14,28 +14,28 @@ services:
     ports:
       - 3000:3000
 
-  # my_database:
-  #   platform: linux/x86_64
-  #   container_name: my_database
-  #   image: mysql:8.0.29
-  #   environment:
-  #     MYSQL_DATABASE: 'mvc01'
-  #     MYSQL_ROOT_PASSWORD: 12341234
+  my_database:
+    platform: linux/x86_64
+    container_name: my_database
+    image: mysql:8.0.29
+    environment:
+      MYSQL_DATABASE: 'mvc01'
+      MYSQL_ROOT_PASSWORD: 12341234
 
-  #     TZ: Asia/Seoul
-  #   command:
-  #     - --character-set-server=utf8mb4
-  #     - --collation-server=utf8mb4_unicode_ci
-  #     - --skip-character-set-client-handshake
-  #   cap_add:
-  #     - SYS_NICE
-  #   ports:
-  #     - 3306:3306
+      TZ: Asia/Seoul
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --skip-character-set-client-handshake
+    cap_add:
+      - SYS_NICE
+    ports:
+      - 3306:3306
 
-  # my-redis:
-  #   image: redis:latest
-  #   ports:
-  #     - 6379:6379
+  my-redis:
+    image: redis:latest
+    ports:
+      - 6379:6379
 
   # logstash:
   #     platform: linux/x86_64
