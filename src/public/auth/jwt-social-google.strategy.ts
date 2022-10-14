@@ -7,7 +7,12 @@ export class JwtGoogleStrategy extends PassportStrategy(Strategy, 'google') {
     super({
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: 'http://localhost:3000/login/google',
+      auth_uri: 'https://accounts.google.com/o/oauth2/auth',
+      token_uri: 'https://oauth2.googleapis.com/token',
+      auth_provider_x509_cert_url: 'https://www.googleapis.com/oauth2/v1/certs',
+      redirect_uris: 'https://shootingbasketball00.shop/login/google',
+      callbackURL: 'https://shootingbasketball00.shop/login/google',
+
       scope: ['email', 'profile'],
     });
   }

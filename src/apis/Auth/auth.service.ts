@@ -35,9 +35,8 @@ export class AuthService {
       { name: user.name },
       { secret: process.env.REFRESH_TOKEN_KEY, expiresIn: '24h' },
     );
-    const whiteList = ['http://localhost:3000/'];
     const origin = req.headers.origin;
-    if (whiteList.includes(origin)) {
+    if (origin) {
       res.setHeader('Access-Control-Allow-Origin', origin);
     }
     res.cookie('refreshToken', Token);
@@ -67,7 +66,7 @@ export class AuthService {
     }
 
     this.token({ user, res, req });
-    res.redirect('http://localhost:3000');
+    res.redirect('/');
     return user;
   }
 
@@ -77,11 +76,10 @@ export class AuthService {
       const aaa = jwt.verify(token, process.env.REFRESH_TOKEN_KEY);
 
       // res 합쳐야함
-      res.cookie('refreshToken', '').redirect('http://localhost:3000/');
-      // res.redirect('http://localhost:3000/');
+      res.cookie('refreshToken', '').redirect('/');
       return '로그아웃 성공';
     } catch {
-      throw new UnauthorizedException();
+      throw new UnauthorizedException('로그아웃 실패');
     }
   }
 }

@@ -25,12 +25,12 @@ import { AppController } from './app.controller';
     ShootingModule,
     TypeOrmModule.forRoot({
       type: 'mysql',
-      // host: '10.1.64.2',
-      host: 'my_database',
+      host: '10.1.64.2',
+      // host: 'my_database',
       port: 3306,
       username: 'root',
-      // password: 'root',
-      password: '12341234', //local
+      password: 'root',
+      // password: '12341234', //local
       database: 'mvc01',
       entities: [__dirname + '/apis/**/*.entity.*'],
       synchronize: true,
@@ -38,8 +38,8 @@ import { AppController } from './app.controller';
     }),
     CacheModule.register<RedisClientOptions>({
       store: redisStore,
-      // url: 'redis://10.1.65.3:6379',
-      url: 'redis://my-redis:6379',
+      url: 'redis://10.1.65.3:6379',
+      // url: 'redis://my-redis:6379',
 
       isGlobal: true,
     }),
