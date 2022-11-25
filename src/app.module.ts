@@ -25,7 +25,7 @@ import { AppController } from './app.controller';
     ShootingModule,
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: '10.1.64.2',
+      host: '10.107.64.2',
       // host: 'my_database',
       port: 3306,
       username: 'root',

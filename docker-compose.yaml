@@ -3,7 +3,7 @@ version: '3.7'
 services:
   mvc01-server:
     platform: linux/x86_64
-    image: asia.gcr.io/fiery-aspect-364704/mvc01:2.9
+    image: asia.gcr.io/zeta-pivot-368304/mvc01:1.1
     build:
       context: .
       dockerfile: Dockerfile
