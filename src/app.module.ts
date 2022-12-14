@@ -25,13 +25,13 @@ import { AppController } from './app.controller';
     ShootingModule,
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: '10.114.131.4',
+      host: '10.114.128.90',
       // host: 'my_database',
       port: 3306,
       username: 'root',
       password: 'root',
       // password: '12341234', //local
-      database: 'mvc01',
+      database: 'database',
       entities: [__dirname + '/apis/**/*.entity.*'],
       synchronize: true,
       logging: true,
